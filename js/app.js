@@ -148,3 +148,37 @@ function hideError() {
 }
 
 loadClippings();
+loadReviews();
+
+async function loadReviews() {
+  try {
+    const res = await fetch('/api/reviews');
+    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    renderReviews('games', data.games);
+    renderReviews('film',  data.film);
+    renderReviews('music', data.music);
+  } catch (e) {
+    ['games', 'film', 'music'].forEach(k => {
+      document.getElementById(`reviews-${k}`).innerHTML =
+        `<div class="clip-empty">Could not load.</div>`;
+    });
+  }
+}
+
+function renderReviews(key, items) {
+  const el = document.getElementById(`reviews-${key}`);
+  if (!items || items.length === 0) {
+    el.innerHTML = `<div class="clip-empty">Nothing yet.</div>`;
+    return;
+  }
+  el.innerHTML = items.map(item => `
+    <a class="review-item" href="${escAttr(item.link)}" target="_blank" rel="noopener">
+      ${item.thumb ? `<img class="review-thumb" src="${escAttr(item.thumb)}" alt="" loading="lazy">` : ''}
+      <div class="review-item-body">
+        <div class="review-item-title">${esc(item.title)}</div>
+        ${item.date ? `<div class="review-item-date">${fmtDate(item.date)}</div>` : ''}
+      </div>
+    </a>
+  `).join('');
+}
