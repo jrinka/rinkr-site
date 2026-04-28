@@ -279,6 +279,9 @@ select option { background: var(--bg); }
 .tag-poem    { background: var(--tag-poem); }
 .tag-image   { background: var(--tag-image); }
 .tag-person  { background: var(--tag-person); }
+.tag-edu     { background: #3a5c40; }
+.tag-art     { background: #6b3a5c; }
+.tag-weird   { background: #5c4a20; }
 .tag-other   { background: var(--tag-other); }
 
 .clip-date {

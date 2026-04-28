@@ -5,7 +5,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
-const VALID_TAGS = ['article', 'poem', 'image', 'person', 'other'];
+const VALID_TAGS = ['article', 'poem', 'image', 'person', 'edu', 'art', 'weird', 'other'];
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
