@@ -3,27 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>rinkr.net — coming soon</title>
-  <style>
-    body {
-      margin: 0;
-      background: #1a1a2e;
-      color: #fff;
-      font-family: Verdana, Geneva, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    p { color: #aaa; font-size: 0.9rem; }
-  </style>
+  <title>rinkr</title>
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <div>
-    <h1>rinkr.net</h1>
-    <p>something web 2.0 this way comes</p>
-  </div>
+
+  <header class="site-header">
+    <span class="site-title">rinkr</span>
+    <span class="site-subtitle">personal dashboard</span>
+  </header>
+
+  <nav class="launch-strip">
+    <span class="launch-label">tools</span>
+    <div class="launch-group">
+      <a class="launch-link" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>
+      <a class="launch-link" href="https://kimi.ai" target="_blank" rel="noopener">Kimi</a>
+      <a class="launch-link" href="https://chatgpt.com" target="_blank" rel="noopener">OpenAI</a>
+    </div>
+    <div class="launch-sep"></div>
+    <span class="launch-label">work</span>
+    <div class="launch-group">
+      <a class="launch-link" href="https://powerschool.com" target="_blank" rel="noopener">PowerSchool</a>
+      <a class="launch-link" href="https://office.com" target="_blank" rel="noopener">M365</a>
+      <a class="launch-link" href="https://todoist.com" target="_blank" rel="noopener">Todoist</a>
+      <a class="launch-link" href="https://taobao.com" target="_blank" rel="noopener">Taobao</a>
+    </div>
+  </nav>
+
+  <main class="main-layout">
+
+    <section>
+      <div class="section-header">
+        <span class="section-title">Clippings</span>
+        <div class="tag-filters">
+          <button class="tag-filter active" data-tag="all">all</button>
+          <button class="tag-filter" data-tag="article">article</button>
+          <button class="tag-filter" data-tag="poem">poem</button>
+          <button class="tag-filter" data-tag="image">image</button>
+          <button class="tag-filter" data-tag="person">person</button>
+          <button class="tag-filter" data-tag="other">other</button>
+        </div>
+      </div>
+
+      <form class="clip-form" id="clip-form">
+        <div class="clip-form-row">
+          <div class="form-group">
+            <label for="clip-title">title</label>
+            <input type="text" id="clip-title" placeholder="What is it?" required />
+          </div>
+          <div class="form-group">
+            <label for="clip-tag">tag</label>
+            <select id="clip-tag">
+              <option value="article">article</option>
+              <option value="poem">poem</option>
+              <option value="image">image</option>
+              <option value="person">person</option>
+              <option value="other">other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="clip-url">url</label>
+          <input type="url" id="clip-url" placeholder="https://…" />
+        </div>
+        <div class="form-group">
+          <label for="clip-note">note</label>
+          <textarea id="clip-note" placeholder="Why does this matter?"></textarea>
+        </div>
+        <div class="clip-form-actions">
+          <button type="submit" class="btn btn-primary" id="clip-submit">add clipping</button>
+        </div>
+        <div id="clip-error" class="error-banner" style="display:none;"></div>
+      </form>
+
+      <div id="clip-list" class="clip-list">
+        <div class="clip-loading">loading…</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-header">
+        <span class="section-title">Metacritic</span>
+      </div>
+      <div class="panel-placeholder">New releases — coming soon</div>
+    </section>
+
+  </main>
+
+  <script src="/js/app.js"></script>
 </body>
 </html>
