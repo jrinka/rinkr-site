@@ -1,16 +1,16 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0f0f0f;
-  --surface: #161616;
-  --surface-raised: #1e1e1e;
-  --border: #2c2c2c;
-  --text: #cecece;
-  --text-dim: #888;
-  --text-faint: #555;
-  --accent: #b8864e;
-  --accent-dim: rgba(184, 134, 78, 0.1);
-  --accent-border: rgba(184, 134, 78, 0.28);
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-raised: #21262d;
+  --border: #21262d;
+  --text: #c9d1d9;
+  --text-dim: #8b949e;
+  --text-faint: #6e7681;
+  --accent: #c9a84c;
+  --accent-dim: rgba(201, 168, 76, 0.08);
+  --accent-border: rgba(201, 168, 76, 0.32);
   --danger-bg: rgba(138, 58, 58, 0.15);
   --danger-border: #8a3a3a;
   --danger-text: #e08080;
