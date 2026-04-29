@@ -10,6 +10,7 @@
 
   <header class="site-header">
     <span class="site-title">rinkr</span>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">◐</button>
   </header>
 
   <div class="quickclip-bar">
@@ -108,5 +109,20 @@
   </main>
 
   <script src="/js/app.js"></script>
+  <script>
+    (function() {
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      const stored = localStorage.getItem('rinkr-theme');
+      if (stored) root.setAttribute('data-theme', stored);
+
+      btn.addEventListener('click', function() {
+        const current = root.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('rinkr-theme', next);
+      });
+    })();
+  </script>
 </body>
 </html>

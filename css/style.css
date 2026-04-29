@@ -29,6 +29,24 @@
   --font-mono: ui-monospace, 'SF Mono', 'Fira Code', Menlo, monospace;
   --radius: 4px;
   --gap: 1rem;
+  --border-hover: #3c3c3c;
+}
+
+[data-theme="light"] {
+  --bg: #f7f7f2;
+  --surface: #eeeeea;
+  --surface-raised: #e5e5e0;
+  --border: #d4d4ce;
+  --border-hover: #aaaaaa;
+  --text: #1c1c1c;
+  --text-dim: #444444;
+  --text-faint: #888888;
+  --accent: #9a6f2a;
+  --accent-dim: rgba(154, 111, 42, 0.1);
+  --accent-border: rgba(154, 111, 42, 0.35);
+  --danger-bg: rgba(160, 50, 50, 0.08);
+  --danger-border: #b06060;
+  --danger-text: #993030;
 }
 
 body {
@@ -49,6 +67,9 @@ body {
 .site-header {
   padding: 0.9rem var(--gap);
   border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .site-title {
@@ -57,6 +78,20 @@ body {
   color: var(--accent);
   letter-spacing: -0.02em;
 }
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-faint);
+  padding: 0.2rem 0.3rem;
+  border-radius: var(--radius);
+  line-height: 1;
+  transition: color 0.12s;
+}
+
+.theme-toggle:hover { color: var(--accent); }
 
 /* Quick-clip bar */
 .quickclip-bar {
@@ -284,7 +319,7 @@ select option { background: var(--bg); }
   transition: all 0.12s;
 }
 
-.tag-filter:hover { border-color: #555; color: var(--text); }
+.tag-filter:hover { border-color: var(--border-hover); color: var(--text); }
 .tag-filter.active { background: var(--accent); border-color: var(--accent); color: #0f0f0f; }
 
 /* Clip list */
@@ -305,7 +340,7 @@ select option { background: var(--bg); }
 
 .clip-card:hover {
   transform: translateY(-1px);
-  border-color: #3c3c3c;
+  border-color: var(--border-hover);
   box-shadow: 0 4px 18px rgba(0,0,0,0.28);
 }
 
@@ -440,7 +475,7 @@ select option { background: var(--bg); }
   transition: color 0.12s, border-color 0.12s;
 }
 
-.btn-load-more:hover { color: var(--text); border-color: #444; }
+.btn-load-more:hover { color: var(--text); border-color: var(--border-hover); }
 
 /* Reviews */
 .review-tabs { display: flex; gap: 0.35rem; }
@@ -457,7 +492,7 @@ select option { background: var(--bg); }
   transition: all 0.12s;
 }
 
-.review-tab:hover { border-color: #555; color: var(--text); }
+.review-tab:hover { border-color: var(--border-hover); color: var(--text); }
 .review-tab.active { background: var(--accent); border-color: var(--accent); color: #0f0f0f; }
 
 .review-panel {
