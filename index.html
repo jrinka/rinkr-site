@@ -10,28 +10,24 @@
 
   <header class="site-header">
     <span class="site-title">rinkr</span>
-    <span class="site-subtitle">personal dashboard</span>
   </header>
 
-  <nav class="launch-strip">
-    <span class="launch-label">tools</span>
-    <div class="launch-group">
-      <a class="launch-link" href="https://kagi.com" target="_blank" rel="noopener">Kagi</a>
-      <a class="launch-link" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>
-      <a class="launch-link" href="https://kimi.ai" target="_blank" rel="noopener">Kimi</a>
-      <a class="launch-link" href="https://chatgpt.com" target="_blank" rel="noopener">OpenAI</a>
-    </div>
-    <div class="launch-sep"></div>
-    <span class="launch-label">work</span>
-    <div class="launch-group">
-      <a class="launch-link" href="https://powerschool.com" target="_blank" rel="noopener">PowerSchool</a>
-      <a class="launch-link" href="https://office.com" target="_blank" rel="noopener">M365</a>
-      <a class="launch-link" href="https://todoist.com" target="_blank" rel="noopener">Todoist</a>
-      <a class="launch-link" href="https://taobao.com" target="_blank" rel="noopener">Taobao</a>
-    </div>
-  </nav>
+  <div class="quickclip-bar">
+    <form id="quickclip-form" class="quickclip-form" autocomplete="off">
+      <input type="text" id="quickclip-url" class="quickclip-input" placeholder="paste a url to clip…" spellcheck="false" />
+      <div id="quickclip-status" class="quickclip-status"></div>
+    </form>
+  </div>
 
   <main class="main-layout">
+
+    <section id="on-my-mind-section" style="display:none;">
+      <div class="section-header">
+        <span class="section-title">on my mind</span>
+        <span id="flagged-count" class="flagged-count"></span>
+      </div>
+      <div id="flagged-list" class="flagged-list"></div>
+    </section>
 
     <section>
       <div class="section-header">
@@ -81,7 +77,7 @@
           <textarea id="clip-note" placeholder="Why does this matter?"></textarea>
         </div>
         <div class="clip-form-actions">
-          <button type="submit" class="btn btn-primary" id="clip-submit">add clipping</button>
+          <button type="submit" class="btn btn-primary" id="clip-submit">save clipping</button>
         </div>
         <div id="clip-error" class="error-banner" style="display:none;"></div>
       </form>
