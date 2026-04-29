@@ -34,7 +34,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   min-height: 100vh;
 }
@@ -293,7 +293,7 @@ select option { background: var(--bg); }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 0.65rem 0.75rem 0.65rem 0.85rem;
+  padding: 0.85rem 0.85rem 0.85rem 1rem;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 0.5rem;
@@ -379,7 +379,7 @@ select option { background: var(--bg); }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.15rem;
   padding-top: 0.05rem;
 }
 
@@ -387,13 +387,15 @@ select option { background: var(--bg); }
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   line-height: 1;
-  padding: 0.15rem 0.2rem;
+  padding: 0.25rem 0.3rem;
   border-radius: var(--radius);
   color: var(--text-faint);
   transition: color 0.12s, background 0.12s;
   font-family: var(--font-mono);
+  min-width: 28px;
+  text-align: center;
 }
 
 .clip-action-btn:hover { color: var(--text); }
