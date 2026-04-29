@@ -31,14 +31,15 @@ function getTitle(html) {
 function suggestTag(url, ogType) {
   try {
     const domain = new URL(url).hostname.replace(/^www\./, '');
-    if (/instagram|flickr|unsplash|imgur|500px|behance|dribbble|pinterest|deviantart/.test(domain)) return 'image';
-    if (/poetryfoundation|poets\.org|allpoetry|poetryarchive/.test(domain)) return 'poem';
-    if (/twitter|x\.com|linkedin|wikipedia/.test(domain)) return 'person';
-    if (/arxiv|jstor|springer|academia\.edu|researchgate|coursera|edx|khanacademy|scholar\.google/.test(domain)) return 'edu';
-    if (/artsy|moma|tate|guggenheim|artnet|nga\.gov|metmuseum/.test(domain)) return 'art';
+    if (/steampowered|ign\.com|gamespot|eurogamer|kotaku|polygon|rockpapershotgun|giantbomb|pcgamer|gamesradar/.test(domain)) return 'gaming';
+    if (/spotify|bandcamp|soundcloud|pitchfork|last\.fm|allmusic|rateyourmusic|tidal|music\.apple/.test(domain)) return 'music';
+    if (/youtube|vimeo|twitch|mubi|letterboxd|imdb|rottentomatoes/.test(domain)) return 'watch';
+    if (/arxiv|jstor|springer|academia\.edu|researchgate|coursera|edx|khanacademy|scholar\.google|pubmed|nature\.com|sciencemag/.test(domain)) return 'edu';
+    if (/artsy|moma|tate|guggenheim|artnet|nga\.gov|metmuseum|behance|dribbble|are\.na/.test(domain)) return 'art';
+    if (/nytimes|bbc\.|theguardian|reuters|apnews|washingtonpost|theatlantic|economist|ft\.com|bloomberg|npr\.org/.test(domain)) return 'news';
   } catch {}
-  if (ogType === 'article') return 'article';
-  return 'article';
+  if (ogType === 'article') return 'read';
+  return 'other';
 }
 
 module.exports = async function handler(req, res) {

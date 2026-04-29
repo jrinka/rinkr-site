@@ -15,14 +15,15 @@
   --danger-border: #8a3a3a;
   --danger-text: #e08080;
 
-  --tag-article: #3a6080;
-  --tag-poem: #5a3a70;
-  --tag-image: #2a6050;
-  --tag-person: #604030;
-  --tag-edu: #3a5c40;
-  --tag-art: #6b3a5c;
-  --tag-weird: #5c4a20;
-  --tag-other: #404060;
+  --tag-news:   #3d5a6e;
+  --tag-edu:    #3a5c40;
+  --tag-gaming: #4a3a6e;
+  --tag-art:    #6e3a5a;
+  --tag-music:  #3a4a6e;
+  --tag-read:   #5a4a30;
+  --tag-watch:  #2e5a6e;
+  --tag-weird:  #5c4a20;
+  --tag-other:  #404060;
 
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', 'Fira Code', Menlo, monospace;
@@ -331,14 +332,15 @@ select option { background: var(--bg); }
   color: rgba(255,255,255,0.85);
 }
 
-.tag-article { background: var(--tag-article); }
-.tag-poem    { background: var(--tag-poem); }
-.tag-image   { background: var(--tag-image); }
-.tag-person  { background: var(--tag-person); }
-.tag-edu     { background: var(--tag-edu); }
-.tag-art     { background: var(--tag-art); }
-.tag-weird   { background: var(--tag-weird); }
-.tag-other   { background: var(--tag-other); }
+.tag-news   { background: var(--tag-news); }
+.tag-edu    { background: var(--tag-edu); }
+.tag-gaming { background: var(--tag-gaming); }
+.tag-art    { background: var(--tag-art); }
+.tag-music  { background: var(--tag-music); }
+.tag-read   { background: var(--tag-read); }
+.tag-watch  { background: var(--tag-watch); }
+.tag-weird  { background: var(--tag-weird); }
+.tag-other  { background: var(--tag-other); }
 
 .clip-date {
   font-size: 0.67rem;
