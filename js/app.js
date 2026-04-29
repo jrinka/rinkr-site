@@ -1,17 +1,29 @@
 const API = '/api/clippings';
+const PAGE_SIZE = 10;
 
 let allClippings = [];
 let activeTag = 'all';
+let visibleCount = PAGE_SIZE;
 
-const titleInput = document.getElementById('clip-title');
-const tagInput   = document.getElementById('clip-tag');
-const urlInput   = document.getElementById('clip-url');
-const noteInput  = document.getElementById('clip-note');
-const submitBtn  = document.getElementById('clip-submit');
-const errorEl    = document.getElementById('clip-error');
-const listEl     = document.getElementById('clip-list');
-const form       = document.getElementById('clip-form');
+const titleInput  = document.getElementById('clip-title');
+const tagInput    = document.getElementById('clip-tag');
+const urlInput    = document.getElementById('clip-url');
+const noteInput   = document.getElementById('clip-note');
+const submitBtn   = document.getElementById('clip-submit');
+const errorEl     = document.getElementById('clip-error');
+const listEl      = document.getElementById('clip-list');
+const form        = document.getElementById('clip-form');
+const formToggle  = document.getElementById('form-toggle');
 
+// Form toggle
+formToggle.addEventListener('click', () => {
+  const isOpen = form.style.display !== 'none';
+  form.style.display = isOpen ? 'none' : 'grid';
+  formToggle.classList.toggle('open', !isOpen);
+  if (!isOpen) titleInput.focus();
+});
+
+// Load clippings
 async function loadClippings() {
   try {
     const res = await fetch(API);
@@ -24,18 +36,21 @@ async function loadClippings() {
 }
 
 function renderList() {
-  const items = activeTag === 'all'
+  const filtered = activeTag === 'all'
     ? allClippings
     : allClippings.filter(c => c.tag === activeTag);
 
-  if (items.length === 0) {
+  if (filtered.length === 0) {
     listEl.innerHTML = `<div class="clip-empty">${
       activeTag === 'all' ? 'Nothing clipped yet.' : `No ${activeTag} clippings.`
     }</div>`;
     return;
   }
 
-  listEl.innerHTML = items.map(c => `
+  const visible = filtered.slice(0, visibleCount);
+  const remaining = filtered.length - visible.length;
+
+  listEl.innerHTML = visible.map(c => `
     <div class="clip-card">
       <div class="clip-main">
         <div class="clip-meta">
@@ -50,11 +65,20 @@ function renderList() {
     </div>
   `).join('');
 
+  if (remaining > 0) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-load-more';
+    btn.textContent = `load ${Math.min(remaining, PAGE_SIZE)} more (${remaining} remaining)`;
+    btn.addEventListener('click', () => { visibleCount += PAGE_SIZE; renderList(); });
+    listEl.appendChild(btn);
+  }
+
   listEl.querySelectorAll('.clip-delete').forEach(btn => {
     btn.addEventListener('click', () => deleteClipping(btn.dataset.id));
   });
 }
 
+// Add clipping
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   hideError();
@@ -91,6 +115,7 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
+// Delete clipping
 async function deleteClipping(id) {
   if (!confirm('Delete this clipping?')) return;
   try {
@@ -103,53 +128,28 @@ async function deleteClipping(id) {
   }
 }
 
+// Tag filters
 document.querySelectorAll('.tag-filter').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tag-filter').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     activeTag = btn.dataset.tag;
+    visibleCount = PAGE_SIZE;
     renderList();
   });
 });
 
-function fmtDate(iso) {
-  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
+// Review tabs
+document.querySelectorAll('.review-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.review-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.review-panel').forEach(p => { p.hidden = true; });
+    btn.classList.add('active');
+    document.getElementById(`reviews-${btn.dataset.panel}`).hidden = false;
+  });
+});
 
-function truncUrl(url) {
-  try {
-    const u = new URL(url);
-    const path = u.pathname === '/' ? '' : u.pathname;
-    return u.hostname + path;
-  } catch {
-    return url;
-  }
-}
-
-function esc(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
-function escAttr(str) {
-  return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
-
-function showError(msg) {
-  errorEl.textContent = msg;
-  errorEl.style.display = 'block';
-}
-
-function hideError() {
-  errorEl.style.display = 'none';
-}
-
-loadClippings();
-loadReviews();
-
+// Reviews
 async function loadReviews() {
   try {
     const res = await fetch('/api/reviews');
@@ -182,3 +182,31 @@ function renderReviews(key, items) {
     </a>
   `).join('');
 }
+
+// Helpers
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function truncUrl(url) {
+  try {
+    const u = new URL(url);
+    return u.hostname + (u.pathname === '/' ? '' : u.pathname);
+  } catch { return url; }
+}
+
+function esc(str) {
+  return String(str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function escAttr(str) {
+  return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function showError(msg) { errorEl.textContent = msg; errorEl.style.display = 'block'; }
+function hideError() { errorEl.style.display = 'none'; }
+
+loadClippings();
+loadReviews();

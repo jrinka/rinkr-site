@@ -36,20 +36,23 @@
     <section>
       <div class="section-header">
         <span class="section-title">Clippings</span>
-        <div class="tag-filters">
-          <button class="tag-filter active" data-tag="all">all</button>
-          <button class="tag-filter" data-tag="article">article</button>
-          <button class="tag-filter" data-tag="poem">poem</button>
-          <button class="tag-filter" data-tag="image">image</button>
-          <button class="tag-filter" data-tag="person">person</button>
-          <button class="tag-filter" data-tag="edu">edu</button>
-          <button class="tag-filter" data-tag="art">art</button>
-          <button class="tag-filter" data-tag="weird">weird</button>
-          <button class="tag-filter" data-tag="other">other</button>
+        <div class="section-header-right">
+          <div class="tag-filters">
+            <button class="tag-filter active" data-tag="all">all</button>
+            <button class="tag-filter" data-tag="article">article</button>
+            <button class="tag-filter" data-tag="poem">poem</button>
+            <button class="tag-filter" data-tag="image">image</button>
+            <button class="tag-filter" data-tag="person">person</button>
+            <button class="tag-filter" data-tag="edu">edu</button>
+            <button class="tag-filter" data-tag="art">art</button>
+            <button class="tag-filter" data-tag="weird">weird</button>
+            <button class="tag-filter" data-tag="other">other</button>
+          </div>
+          <button id="form-toggle" class="form-toggle-btn" aria-label="Add clipping">+</button>
         </div>
       </div>
 
-      <form class="clip-form" id="clip-form">
+      <form class="clip-form" id="clip-form" style="display:none;">
         <div class="clip-form-row">
           <div class="form-group">
             <label for="clip-title">title</label>
@@ -91,20 +94,16 @@
     <section>
       <div class="section-header">
         <span class="section-title">New Reviews</span>
+        <div class="review-tabs">
+          <button class="review-tab active" data-panel="games">games</button>
+          <button class="review-tab" data-panel="film">film</button>
+          <button class="review-tab" data-panel="music">music</button>
+        </div>
       </div>
-      <div class="reviews-grid">
-        <div class="review-col">
-          <div class="review-col-title">games</div>
-          <div id="reviews-games" class="review-list"><div class="clip-loading">loading…</div></div>
-        </div>
-        <div class="review-col">
-          <div class="review-col-title">film</div>
-          <div id="reviews-film" class="review-list"><div class="clip-loading">loading…</div></div>
-        </div>
-        <div class="review-col">
-          <div class="review-col-title">music</div>
-          <div id="reviews-music" class="review-list"><div class="clip-loading">loading…</div></div>
-        </div>
+      <div class="review-panels">
+        <div id="reviews-games" class="review-panel review-list"><div class="clip-loading">loading…</div></div>
+        <div id="reviews-film" class="review-panel review-list" hidden><div class="clip-loading">loading…</div></div>
+        <div id="reviews-music" class="review-panel review-list" hidden><div class="clip-loading">loading…</div></div>
       </div>
     </section>
 
