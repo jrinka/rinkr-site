@@ -429,6 +429,8 @@ select option { background: var(--bg); }
   gap: 0.5rem;
 }
 
+.review-panel[hidden] { display: none; }
+
 .review-list {
   display: grid;
   gap: 0.5rem;
