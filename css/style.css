@@ -49,6 +49,13 @@
   --danger-text: #993030;
 }
 
+[data-theme="light"] .tag-filter.active,
+[data-theme="light"] .review-tab.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -158,7 +165,7 @@ body {
 
 .section-title {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--text-dim);
