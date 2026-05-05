@@ -290,8 +290,9 @@ async function loadReviews() {
     renderReviews('games', data.games);
     renderReviews('film',  data.film);
     renderReviews('music', data.music);
+    renderReviews('books', data.books);
   } catch {
-    ['games', 'film', 'music'].forEach(k => {
+    ['games', 'film', 'music', 'books'].forEach(k => {
       document.getElementById(`reviews-${k}`).innerHTML = `<div class="clip-empty">Could not load.</div>`;
     });
   }

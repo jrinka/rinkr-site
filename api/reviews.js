@@ -1,7 +1,8 @@
 const FEEDS = {
-  games: 'https://www.eurogamer.net/feed/reviews',
+  games: 'https://feeds.ign.com/ign/games-reviews',
   film:  'https://www.rogerebert.com/feed',
   music: 'https://pitchfork.com/feed/feed-album-reviews/rss',
+  books: 'https://www.theguardian.com/books/reviews/rss',
 };
 
 const LIMIT = 6;
@@ -47,20 +48,23 @@ async function fetchFeed(url) {
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate=3600');
 
-  const [games, film, music] = await Promise.allSettled([
+  const [games, film, music, books] = await Promise.allSettled([
     fetchFeed(FEEDS.games),
     fetchFeed(FEEDS.film),
     fetchFeed(FEEDS.music),
+    fetchFeed(FEEDS.books),
   ]);
 
   return res.status(200).json({
     games: games.status === 'fulfilled' ? games.value : [],
     film:  film.status  === 'fulfilled' ? film.value  : [],
     music: music.status === 'fulfilled' ? music.value : [],
+    books: books.status === 'fulfilled' ? books.value : [],
     errors: {
       games: games.status === 'rejected' ? games.reason.message : null,
       film:  film.status  === 'rejected' ? film.reason.message  : null,
       music: music.status === 'rejected' ? music.reason.message : null,
+      books: books.status === 'rejected' ? books.reason.message : null,
     },
   });
 };
