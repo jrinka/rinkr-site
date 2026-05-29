@@ -29,8 +29,9 @@ async function load() {
     if (!res.ok) throw new Error(res.status);
     data = await res.json();
   } catch {
-    document.getElementById('reading-list').innerHTML = '<div class="empty">Could not load.</div>';
-    document.getElementById('link-list').innerHTML = '<div class="empty">Could not load.</div>';
+    ['reading-list', 'fresh-list', 'deep-list'].forEach(id => {
+      document.getElementById(id).innerHTML = '<div class="empty">Could not load.</div>';
+    });
     return;
   }
 
@@ -49,22 +50,27 @@ async function load() {
     `).join('');
   }
 
-  // Links
-  const linkEl = document.getElementById('link-list');
-  if (!data.links || data.links.length === 0) {
-    linkEl.innerHTML = '<div class="empty">Nothing posted yet.</div>';
-  } else {
-    linkEl.innerHTML = data.links.map(l => `
-      <div class="link-item">
-        <div class="link-row">
-          <a class="link-title" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.title)}</a>
-          ${l.url ? `<span class="link-domain">${esc(domain(l.url))}</span>` : ''}
-          ${l.for === 'students' ? `<span class="link-badge">class</span>` : ''}
-        </div>
-        ${l.note ? `<div class="link-note">${esc(l.note)}</div>` : ''}
-      </div>
-    `).join('');
+  // Fresh + Deep Dive (same link format, different sections)
+  renderLinks('fresh-list', data.fresh, 'Nothing posted yet.');
+  renderLinks('deep-list', data.deep, 'Nothing posted yet.');
+}
+
+function renderLinks(id, items, emptyMsg) {
+  const el = document.getElementById(id);
+  if (!items || items.length === 0) {
+    el.innerHTML = `<div class="empty">${emptyMsg}</div>`;
+    return;
   }
+  el.innerHTML = items.map(l => `
+    <div class="link-item">
+      <div class="link-row">
+        <a class="link-title" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.title)}</a>
+        ${l.url ? `<span class="link-domain">${esc(domain(l.url))}</span>` : ''}
+        ${l.for === 'students' ? `<span class="link-badge">class</span>` : ''}
+      </div>
+      ${l.note ? `<div class="link-note">${esc(l.note)}</div>` : ''}
+    </div>
+  `).join('');
 }
 
 load();

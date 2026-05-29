@@ -13,19 +13,21 @@
       "note": ""
     }
   ],
-  "links": [
+  "fresh": [
     {
       "title": "The Danger of a Single Story",
       "url": "https://www.ted.com/talks/chimamanda_ngozi_adichie_the_danger_of_a_single_story",
-      "note": "Chimamanda Ngozi Adichie's TED talk — good for discussions on perspective",
+      "note": "Good for discussions on perspective",
       "for": "students"
     },
     {
-      "title": "Annotating a Text",
-      "url": "https://owl.purdue.edu/owl/general_writing/the_writing_process/reading_to_write/annotating_a_text.html",
+      "title": "Poem of the Day — The Academy of American Poets",
+      "url": "https://poets.org/poem-a-day",
       "note": "",
       "for": "students"
-    },
+    }
+  ],
+  "deep": [
     {
       "title": "The Paris Review — Interviews",
       "url": "https://www.theparisreview.org/interviews",
