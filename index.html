@@ -1,130 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>rinkr</title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <header class="site-header">
     <span class="site-title">rinkr</span>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">◐</button>
+    <button class="theme-toggle" id="theme-toggle" title="toggle theme">◐</button>
   </header>
 
-  <div class="quickclip-bar">
-    <form id="quickclip-form" class="quickclip-form" autocomplete="off">
-      <input type="text" id="quickclip-url" class="quickclip-input" placeholder="paste a url to clip…" spellcheck="false" />
-      <div id="quickclip-status" class="quickclip-status"></div>
-    </form>
-  </div>
+  <main class="main">
 
-  <main class="main-layout">
-
-    <section id="on-my-mind-section" style="display:none;">
+    <section class="section">
       <div class="section-header">
-        <span class="section-title">on my mind</span>
-        <span id="flagged-count" class="flagged-count"></span>
+        <span class="section-title">Currently Reading</span>
       </div>
-      <div id="flagged-list" class="flagged-list"></div>
-    </section>
-
-    <section>
-      <div class="section-header">
-        <span class="section-title">Clippings</span>
-        <div class="section-header-right">
-          <div class="tag-filters">
-            <button class="tag-filter active" data-tag="all">all</button>
-            <button class="tag-filter" data-tag="news">news</button>
-            <button class="tag-filter" data-tag="edu">edu</button>
-            <button class="tag-filter" data-tag="gaming">gaming</button>
-            <button class="tag-filter" data-tag="art">art</button>
-            <button class="tag-filter" data-tag="music">music</button>
-            <button class="tag-filter" data-tag="read">read</button>
-            <button class="tag-filter" data-tag="watch">watch</button>
-            <button class="tag-filter" data-tag="weird">weird</button>
-            <button class="tag-filter" data-tag="other">other</button>
-          </div>
-          <button id="form-toggle" class="form-toggle-btn" aria-label="Add clipping">+</button>
-        </div>
-      </div>
-
-      <form class="clip-form" id="clip-form" style="display:none;">
-        <div class="clip-form-row">
-          <div class="form-group">
-            <label for="clip-title">title</label>
-            <input type="text" id="clip-title" placeholder="What is it?" required />
-          </div>
-          <div class="form-group">
-            <label for="clip-tag">tag</label>
-            <select id="clip-tag">
-              <option value="news">news</option>
-              <option value="edu">edu</option>
-              <option value="gaming">gaming</option>
-              <option value="art">art</option>
-              <option value="music">music</option>
-              <option value="read">read</option>
-              <option value="watch">watch</option>
-              <option value="weird">weird</option>
-              <option value="other">other</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="clip-url">url</label>
-          <input type="text" id="clip-url" placeholder="https://…" />
-        </div>
-        <div class="form-group">
-          <label for="clip-note">note</label>
-          <textarea id="clip-note" placeholder="Why does this matter?"></textarea>
-        </div>
-        <div class="clip-form-actions">
-          <button type="submit" class="btn btn-primary" id="clip-submit">save clipping</button>
-        </div>
-        <div id="clip-error" class="error-banner" style="display:none;"></div>
-      </form>
-
-      <div id="clip-list" class="clip-list">
-        <div class="clip-loading">loading…</div>
+      <div id="reading-list" class="reading-list">
+        <div class="loading">loading…</div>
       </div>
     </section>
 
-    <section>
+    <section class="section">
       <div class="section-header">
-        <span class="section-title">New Reviews</span>
-        <div class="review-tabs">
-          <button class="review-tab active" data-panel="games">games</button>
-          <button class="review-tab" data-panel="film">film</button>
-          <button class="review-tab" data-panel="music">music</button>
-          <button class="review-tab" data-panel="books">books</button>
-        </div>
+        <span class="section-title">Worth a Look</span>
       </div>
-      <div class="review-panels">
-        <div id="reviews-games" class="review-panel review-list"><div class="clip-loading">loading…</div></div>
-        <div id="reviews-film" class="review-panel review-list" hidden><div class="clip-loading">loading…</div></div>
-        <div id="reviews-music" class="review-panel review-list" hidden><div class="clip-loading">loading…</div></div>
-        <div id="reviews-books" class="review-panel review-list" hidden><div class="clip-loading">loading…</div></div>
+      <div id="link-list" class="link-list">
+        <div class="loading">loading…</div>
       </div>
     </section>
 
   </main>
 
-  <script src="/js/app.js"></script>
-  <script>
-    (function() {
-      const root = document.documentElement;
-      const btn = document.getElementById('theme-toggle');
-      const stored = localStorage.getItem('rinkr-theme');
-      if (stored) root.setAttribute('data-theme', stored);
-
-      btn.addEventListener('click', function() {
-        const current = root.getAttribute('data-theme');
-        const next = current === 'light' ? 'dark' : 'light';
-        root.setAttribute('data-theme', next);
-        localStorage.setItem('rinkr-theme', next);
-      });
-    })();
-  </script>
+  <script src="js/app.js"></script>
 </body>
 </html>

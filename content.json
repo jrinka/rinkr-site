@@ -1,0 +1,36 @@
+{
+  "reading": [
+    {
+      "class": "Period 2",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "note": "Ch. 1–4 this week"
+    },
+    {
+      "class": "Period 4",
+      "title": "Of Mice and Men",
+      "author": "John Steinbeck",
+      "note": ""
+    }
+  ],
+  "links": [
+    {
+      "title": "The Danger of a Single Story",
+      "url": "https://www.ted.com/talks/chimamanda_ngozi_adichie_the_danger_of_a_single_story",
+      "note": "Chimamanda Ngozi Adichie's TED talk — good for discussions on perspective",
+      "for": "students"
+    },
+    {
+      "title": "Annotating a Text",
+      "url": "https://owl.purdue.edu/owl/general_writing/the_writing_process/reading_to_write/annotating_a_text.html",
+      "note": "",
+      "for": "students"
+    },
+    {
+      "title": "The Paris Review — Interviews",
+      "url": "https://www.theparisreview.org/interviews",
+      "note": "Writers talking about craft",
+      "for": "me"
+    }
+  ]
+}

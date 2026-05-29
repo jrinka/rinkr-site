@@ -1,8 +1,5 @@
 {
   "name": "rinkr-site",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "@supabase/supabase-js": "^2.49.4"
-  }
+  "version": "2.0.0",
+  "private": true
 }
