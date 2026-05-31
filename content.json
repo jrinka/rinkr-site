@@ -1,13 +1,13 @@
 {
   "reading": [
     {
-      "class": "IB Lit",
+      "class": "IB LIT",
       "title": "The Great Gatsby",
       "author": "F. Scott Fitzgerald",
       "note": "Ch. 1–4 this week"
     },
     {
-      "class": "IB Lang & Lit",
+      "class": "IB LANG & LIT",
       "title": "Of Mice and Men",
       "author": "John Steinbeck",
       "note": ""
@@ -17,55 +17,79 @@
     {
       "title": "Interior Chinatown",
       "author": "Charles Yu",
-      "class": "IB Lit",
+      "class": "IB LIT",
       "files": []
     },
     {
       "title": "In the Time of the Butterflies",
       "author": "Julia Alvarez",
-      "class": "IB Lit",
+      "class": "IB LIT",
       "files": []
     },
     {
       "title": "No Exit",
       "author": "Jean-Paul Sartre",
-      "class": "IB Lit",
+      "class": "IB LIT",
       "files": []
     },
     {
       "title": "A Doll's House",
       "author": "Henrik Ibsen",
-      "class": "IB Lit",
+      "class": "IB LIT",
       "files": []
     },
     {
       "title": "The World's Wife",
       "author": "Carol Ann Duffy",
-      "class": "IB Lit",
+      "class": "IB LIT",
       "files": []
     },
     {
       "title": "Interpreter of Maladies",
       "author": "Jhumpa Lahiri",
-      "class": "IB Lang & Lit",
+      "class": "IB LIT",
       "files": []
     },
     {
       "title": "Minor Feelings",
       "author": "Cathy Park Hong",
-      "class": "IB Lang & Lit",
+      "class": "IB LIT",
       "files": []
     },
     {
       "title": "Metamorphosis",
       "author": "Franz Kafka",
-      "class": "IB Lit",
+      "class": "IB LIT",
       "files": []
     },
     {
       "title": "Death of a Salesman",
       "author": "Arthur Miller",
-      "class": "IB Lit",
+      "class": "IB LIT",
+      "files": []
+    },
+    {
+      "title": "Lord of the Flies",
+      "author": "William Golding",
+      "class": "E10",
+      "files": []
+    },
+    {
+      "title": "Romeo and Juliet",
+      "author": "William Shakespeare",
+      "class": "E10",
+      "files": []
+    },
+    {
+      "title": "Personal Essays",
+      "author": "",
+      "class": "E10",
+      "files": []
+    },
+    {
+      "title": "Poetry",
+      "author": "",
+      "class": "E10",
       "files": []
     }
   ],

@@ -55,12 +55,27 @@ async function load() {
     return;
   }
 
-  // Currently Reading
+  // Currently Reading — card style on reading.html, plain entries on homepage
   const readingEl = document.getElementById('reading-list');
   if (readingEl) {
     if (!data.reading || data.reading.length === 0) {
       readingEl.innerHTML = '<div class="empty">Nothing assigned yet.</div>';
+    } else if (readingEl.classList.contains('active-reading-grid')) {
+      // Full card style on reading.html
+      readingEl.innerHTML = data.reading.map(b => `
+        <div class="work-card">
+          <div class="work-header${b.class === 'E10' ? ' e10' : ''}">
+            <div class="work-header-text">
+              <div class="work-title">${esc(b.title)}</div>
+              ${b.author ? `<div class="work-author">${esc(b.author)}</div>` : ''}
+            </div>
+            ${b.class ? `<span class="work-class-badge">${esc(b.class)}</span>` : ''}
+          </div>
+          ${b.note ? `<div class="active-card-note">${esc(b.note)}</div>` : '<div class="active-card-note" style="color:transparent">—</div>'}
+        </div>
+      `).join('');
     } else {
+      // Simple entries on homepage
       readingEl.innerHTML = data.reading.map(b => `
         <div class="reading-entry">
           <div class="reading-class">${esc(b.class)}</div>
@@ -92,10 +107,10 @@ async function load() {
               </a>`).join('');
         return `
           <div class="work-card">
-            <div class="work-header">
+            <div class="work-header${w.class === 'E10' ? ' e10' : ''}">
               <div class="work-header-text">
                 <div class="work-title">${esc(w.title)}</div>
-                <div class="work-author">${esc(w.author)}</div>
+                ${w.author ? `<div class="work-author">${esc(w.author)}</div>` : ''}
               </div>
               ${w.class ? `<span class="work-class-badge">${esc(w.class)}</span>` : ''}
             </div>

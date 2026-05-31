@@ -272,13 +272,34 @@ body {
 
 /* ── Works / File Cabinet (reading.html) ─────────────────────────── */
 
---navy: #1E3A5F;
---navy-light: #2a4f7f;
-
 .page-content-wide {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 1.75rem;
+}
+
+/* Active reading cards grid */
+.active-reading-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 0;
+}
+
+.active-card-note {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.825rem;
+  color: var(--text-faint);
+  font-style: italic;
+  background: var(--surface);
+  flex: 1;
+}
+
+/* Divider between active and library */
+.library-divider {
+  border: none;
+  border-top: 2px solid var(--border);
+  margin: 2.5rem 0 2rem;
 }
 
 .cabinet-section-label {
@@ -312,8 +333,11 @@ body {
   box-shadow: 0 2px 10px rgba(0,0,0,0.09);
 }
 
+/* Header color variants by class */
+.work-header               { background: #1E3A5F; } /* IB LIT / IB LANG — navy */
+.work-header.e10           { background: #1A472A; } /* E10 — forest green */
+
 .work-header {
-  background: #1E3A5F;
   padding: 1rem 1.25rem 0.9rem;
   display: flex;
   align-items: flex-start;
