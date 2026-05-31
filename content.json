@@ -13,6 +13,62 @@
       "note": ""
     }
   ],
+  "works": [
+    {
+      "title": "Interior Chinatown",
+      "author": "Charles Yu",
+      "class": "IB Lit",
+      "files": []
+    },
+    {
+      "title": "In the Time of the Butterflies",
+      "author": "Julia Alvarez",
+      "class": "IB Lit",
+      "files": []
+    },
+    {
+      "title": "No Exit",
+      "author": "Jean-Paul Sartre",
+      "class": "IB Lit",
+      "files": []
+    },
+    {
+      "title": "A Doll's House",
+      "author": "Henrik Ibsen",
+      "class": "IB Lit",
+      "files": []
+    },
+    {
+      "title": "The World's Wife",
+      "author": "Carol Ann Duffy",
+      "class": "IB Lit",
+      "files": []
+    },
+    {
+      "title": "Interpreter of Maladies",
+      "author": "Jhumpa Lahiri",
+      "class": "IB Lang & Lit",
+      "files": []
+    },
+    {
+      "title": "Minor Feelings",
+      "author": "Cathy Park Hong",
+      "class": "IB Lang & Lit",
+      "files": []
+    },
+    {
+      "title": "Metamorphosis",
+      "author": "Franz Kafka",
+      "class": "IB Lit",
+      "files": []
+    },
+    {
+      "title": "Death of a Salesman",
+      "author": "Arthur Miller",
+      "class": "IB Lit",
+      "files": []
+    }
+  ],
   "resources": [
     {
       "title": "Purdue OWL — MLA Formatting",

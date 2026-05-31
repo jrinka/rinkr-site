@@ -75,6 +75,36 @@ async function load() {
   // Class Resources + Reading Rabbit Hole
   renderLinks('resources-list', data.resources, 'Nothing posted yet.');
   renderLinks('rabbit-list', data.rabbit, 'Nothing posted yet.');
-}
 
-load();
+  // Works library (reading.html)
+  const worksEl = document.getElementById('works-grid');
+  if (worksEl) {
+    if (!data.works || data.works.length === 0) {
+      worksEl.innerHTML = '<div class="empty">No works yet.</div>';
+    } else {
+      worksEl.innerHTML = data.works.map(w => {
+        const filesHtml = (!w.files || w.files.length === 0)
+          ? `<div class="cabinet-empty">No files yet.</div>`
+          : w.files.map(f => `
+              <a class="cabinet-file" href="${esc(f.url)}" target="_blank" rel="noopener">
+                <span class="cabinet-file-type">${esc(f.type || 'file')}</span>
+                <span class="cabinet-file-name">${esc(f.name)}</span>
+              </a>`).join('');
+        return `
+          <div class="work-card">
+            <div class="work-header">
+              <div class="work-header-text">
+                <div class="work-title">${esc(w.title)}</div>
+                <div class="work-author">${esc(w.author)}</div>
+              </div>
+              ${w.class ? `<span class="work-class-badge">${esc(w.class)}</span>` : ''}
+            </div>
+            <div class="work-cabinet">
+              <div class="cabinet-drawer-label">Files &amp; Resources</div>
+              ${filesHtml}
+            </div>
+          </div>`;
+      }).join('');
+    }
+  }
+}
