@@ -1,11 +1,19 @@
 // Theme
 const root = document.documentElement;
 const toggleBtn = document.getElementById('theme-toggle');
+
+function updateThemeIcon() {
+  toggleBtn.textContent = root.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
+}
+
 root.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+updateThemeIcon();
+
 toggleBtn.addEventListener('click', () => {
   const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   root.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
+  updateThemeIcon();
 });
 
 // Helpers
@@ -117,46 +125,69 @@ async function load() {
   renderLinks('resources-list', data.resources, 'Nothing posted yet.');
   renderLinks('rabbit-list', data.rabbit, 'Nothing posted yet.', 'plum');
 
-  // Works library (reading.html)
-  const worksEl = document.getElementById('works-grid');
-  if (worksEl) {
-    if (!data.works || data.works.length === 0) {
-      worksEl.innerHTML = '<div class="empty">No works yet.</div>';
-    } else {
-      worksEl.innerHTML = data.works.map(w => {
-        const PREVIEW = 2;
-        const renderFile = f => `
-          <a class="cabinet-file" href="${esc(f.url)}" target="_blank" rel="noopener">
-            <span class="cabinet-file-type">${esc(f.type || 'file')}</span>
-            <span class="cabinet-file-name">${esc(f.name)}</span>
-          </a>`;
-        const filesHtml = (!w.files || w.files.length === 0)
-          ? `<div class="cabinet-empty">No files yet.</div>`
-          : (() => {
-              const visible = w.files.slice(0, PREVIEW).map(renderFile).join('');
-              const hidden  = w.files.slice(PREVIEW);
-              return visible
-                + (hidden.length ? `
-                  <div class="files-overflow" style="display:none">${hidden.map(renderFile).join('')}</div>
-                  <button class="files-toggle">+${hidden.length} more</button>` : '');
-            })();
-        return `
+  // Per-class column rendering (reading.html 3-column layout)
+  const PREVIEW = 2;
+  const renderFile = f => `
+    <a class="cabinet-file" href="${esc(f.url)}" target="_blank" rel="noopener">
+      <span class="cabinet-file-type">${esc(f.type || 'file')}</span>
+      <span class="cabinet-file-name">${esc(f.name)}</span>
+    </a>`;
+
+  const headerCls = c => c === 'E10' ? ' e10' : c === 'IB LANG & LIT' ? ' lang-lit' : '';
+
+  const renderWorkCard = w => {
+    const filesHtml = (!w.files || w.files.length === 0)
+      ? `<div class="cabinet-empty">No files yet.</div>`
+      : (() => {
+          const visible = w.files.slice(0, PREVIEW).map(renderFile).join('');
+          const hidden  = w.files.slice(PREVIEW);
+          return visible + (hidden.length ? `
+            <div class="files-overflow" style="display:none">${hidden.map(renderFile).join('')}</div>
+            <button class="files-toggle">+${hidden.length} more</button>` : '');
+        })();
+    return `
+      <div class="work-card">
+        <div class="work-header${headerCls(w.class)}">
+          <div class="work-header-text">
+            <div class="work-title">${esc(w.title)}</div>
+            ${w.author ? `<div class="work-author">${esc(w.author)}</div>` : ''}
+          </div>
+        </div>
+        <div class="work-cabinet">
+          <div class="cabinet-drawer-label">Files &amp; Resources</div>
+          ${filesHtml}
+        </div>
+      </div>`;
+  };
+
+  const classMap = { 'IB LIT': 'iblit', 'IB LANG & LIT': 'iblanglit', 'E10': 'e10' };
+  Object.entries(classMap).forEach(([cls, suffix]) => {
+    const rEl = document.getElementById(`reading-${suffix}`);
+    if (rEl) {
+      const items = (data.reading || []).filter(b => b.class === cls);
+      rEl.innerHTML = items.length === 0
+        ? '<div class="empty">Nothing assigned yet.</div>'
+        : items.map(b => `
           <div class="work-card">
-            <div class="work-header${w.class === 'E10' ? ' e10' : ''}">
+            <div class="work-header${headerCls(cls)}">
               <div class="work-header-text">
-                <div class="work-title">${esc(w.title)}</div>
-                ${w.author ? `<div class="work-author">${esc(w.author)}</div>` : ''}
+                <div class="work-title">${esc(b.title)}</div>
+                ${b.author ? `<div class="work-author">${esc(b.author)}</div>` : ''}
               </div>
-              ${w.class ? `<span class="work-class-badge">${esc(w.class)}</span>` : ''}
             </div>
-            <div class="work-cabinet">
-              <div class="cabinet-drawer-label">Files &amp; Resources</div>
-              ${filesHtml}
-            </div>
-          </div>`;
-      }).join('');
+            ${b.note ? `<div class="active-card-note">${esc(b.note)}</div>` : ''}
+          </div>`).join('');
     }
-  }
+
+    const wEl = document.getElementById(`works-${suffix}`);
+    if (wEl) {
+      const activeTitle = new Set((data.reading || []).map(b => b.title));
+      const items = (data.works || []).filter(w => w.class === cls && !activeTitle.has(w.title));
+      wEl.innerHTML = items.length === 0
+        ? '<div class="empty">No works yet.</div>'
+        : items.map(renderWorkCard).join('');
+    }
+  });
 }
 
 load();

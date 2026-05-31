@@ -2,18 +2,60 @@
   "reading": [
     {
       "class": "IB LIT",
-      "title": "The Great Gatsby",
-      "author": "F. Scott Fitzgerald",
-      "note": "Ch. 1–4 this week"
+      "title": "Interior Chinatown",
+      "author": "Charles Yu",
+      "note": ""
     },
     {
       "class": "IB LANG & LIT",
-      "title": "Of Mice and Men",
-      "author": "John Steinbeck",
+      "title": "An Enemy of the People",
+      "author": "Henrik Ibsen",
+      "note": ""
+    },
+    {
+      "class": "E10",
+      "title": "Lord of the Flies",
+      "author": "William Golding",
       "note": ""
     }
   ],
   "works": [
+    {
+      "title": "An Enemy of the People",
+      "author": "Henrik Ibsen",
+      "class": "IB LANG & LIT",
+      "files": []
+    },
+    {
+      "title": "Parasite",
+      "author": "Bong Joon-ho",
+      "class": "IB LANG & LIT",
+      "files": []
+    },
+    {
+      "title": "Maus",
+      "author": "Art Spiegelman",
+      "class": "IB LANG & LIT",
+      "files": []
+    },
+    {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "class": "IB LANG & LIT",
+      "files": []
+    },
+    {
+      "title": "Kitchen",
+      "author": "Banana Yoshimoto",
+      "class": "IB LIT",
+      "files": [
+        {
+          "name": "Kitchen (epub)",
+          "url": "https://isbdragons-my.sharepoint.com/:u:/g/personal/jrinka_isb_cn/IQCOijrwCRRYSpa6J9C44M01AcbmfeSXf0cPhb5mepG-Fyo?e=6Rhche",
+          "type": "epub"
+        }
+      ]
+    },
     {
       "title": "Interior Chinatown",
       "author": "Charles Yu",

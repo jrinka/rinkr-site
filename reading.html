@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Currently Reading — Mr. Rinka's English Classes</title>
+  <title>Course Texts — Mr. Rinka's English Classes</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="page-reading">
@@ -15,26 +15,44 @@
 
   <div class="page-header">
     <a href="/" class="page-back">← Home</a>
-    <h1 class="page-title">Currently Reading</h1>
-    <p class="page-desc">Active texts this unit, plus the full works library with resources for each text.</p>
+    <h1 class="page-title">Course Texts</h1>
+    <p class="page-desc">Organized by class — active texts for Fall 2026 and the full works library with resources for each text.</p>
   </div>
 
   <div class="page-content-wide">
+    <div class="class-columns">
 
-    <!-- Active reading — card style, above the fold -->
-    <div class="cabinet-section-label">Active This Unit</div>
-    <div id="reading-list" class="active-reading-grid">
-      <div class="loading">loading…</div>
+      <!-- IB Lit -->
+      <div class="class-col class-col--iblit">
+        <div class="class-col-header">IB Lit</div>
+        <div class="cabinet-section-label">Fall 2026</div>
+        <div id="reading-iblit" class="active-reading-col"><div class="loading">loading…</div></div>
+        <hr class="library-divider">
+        <div class="cabinet-section-label">Works Library</div>
+        <div id="works-iblit" class="works-col"><div class="loading">loading…</div></div>
+      </div>
+
+      <!-- IB Lang & Lit -->
+      <div class="class-col class-col--iblanglit">
+        <div class="class-col-header">IB Lang &amp; Lit</div>
+        <div class="cabinet-section-label">Fall 2026</div>
+        <div id="reading-iblanglit" class="active-reading-col"><div class="loading">loading…</div></div>
+        <hr class="library-divider">
+        <div class="cabinet-section-label">Works Library</div>
+        <div id="works-iblanglit" class="works-col"><div class="loading">loading…</div></div>
+      </div>
+
+      <!-- English 10 -->
+      <div class="class-col class-col--e10">
+        <div class="class-col-header">English 10</div>
+        <div class="cabinet-section-label">Fall 2026</div>
+        <div id="reading-e10" class="active-reading-col"><div class="loading">loading…</div></div>
+        <hr class="library-divider">
+        <div class="cabinet-section-label">Works Library</div>
+        <div id="works-e10" class="works-col"><div class="loading">loading…</div></div>
+      </div>
+
     </div>
-
-    <hr class="library-divider">
-
-    <!-- Works library / file cabinet -->
-    <div class="cabinet-section-label">Works Library</div>
-    <div id="works-grid" class="works-grid">
-      <div class="loading">loading…</div>
-    </div>
-
   </div>
 
   <script src="js/app.js"></script>

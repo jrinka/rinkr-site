@@ -276,6 +276,7 @@ body.page-rabbit    .page-header { border-top-color: #3D1A60; }
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.02em;
+  font-family: Georgia, 'Times New Roman', serif;
 }
 
 .page-desc {
@@ -320,12 +321,6 @@ body.page-rabbit    .page-header { border-top-color: #3D1A60; }
   flex: 1;
 }
 
-/* Divider between active and library */
-.library-divider {
-  border: none;
-  border-top: 2px solid var(--border);
-  margin: 2.5rem 0 2rem;
-}
 
 .cabinet-section-label {
   font-family: var(--font-mono);
@@ -359,7 +354,8 @@ body.page-rabbit    .page-header { border-top-color: #3D1A60; }
 }
 
 /* Header color variants by class */
-.work-header               { background: #1E3A5F; } /* IB LIT / IB LANG — navy */
+.work-header               { background: #1E3A5F; } /* IB LIT — navy */
+.work-header.lang-lit      { background: #6B2D42; } /* IB LANG & LIT — wine */
 .work-header.e10           { background: #1A472A; } /* E10 — forest green */
 
 .work-header {
@@ -477,6 +473,46 @@ body.page-rabbit    .page-header { border-top-color: #3D1A60; }
   transition: opacity 0.15s;
 }
 .files-toggle:hover { opacity: 0.7; }
+
+/* ── 3-column class layout (reading.html) ───────────────────────── */
+
+.class-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .class-columns { grid-template-columns: 1fr; }
+}
+
+.class-col-header {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 3px solid #1E3A5F;
+  letter-spacing: -0.01em;
+}
+
+.class-col--iblanglit .class-col-header { border-bottom-color: #6B2D42; }
+.class-col--e10       .class-col-header { border-bottom-color: #1A472A; }
+
+.active-reading-col { margin-bottom: 0; }
+
+.works-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.library-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0 1.25rem;
+}
 
 /* ── Link cards (resources.html, rabbit-hole.html) ───────────────── */
 
