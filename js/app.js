@@ -21,24 +21,50 @@ function domain(url) {
   try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; }
 }
 
-function renderLinks(id, items, emptyMsg) {
+function renderLinks(id, items, emptyMsg, headerClass) {
   const el = document.getElementById(id);
   if (!el) return;
   if (!items || items.length === 0) {
     el.innerHTML = `<div class="empty">${emptyMsg}</div>`;
     return;
   }
-  el.innerHTML = items.map(l => `
-    <div class="link-item">
-      <div class="link-row">
-        <a class="link-title" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.title)}</a>
-        ${l.url ? `<span class="link-domain">${esc(domain(l.url))}</span>` : ''}
-        ${l.for === 'students' ? `<span class="link-badge">class</span>` : ''}
+  // Card style on full pages (link-cards-grid), plain list on homepage
+  if (el.classList.contains('link-cards-grid')) {
+    el.innerHTML = items.map(l => `
+      <div class="link-card">
+        <div class="link-card-header${headerClass ? ' ' + headerClass : ''}">
+          <a class="link-card-title" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.title)}</a>
+          ${l.url ? `<span class="link-card-domain">${esc(domain(l.url))}</span>` : ''}
+        </div>
+        <div class="link-card-body">
+          ${l.note ? `<p class="link-card-note">${esc(l.note)}</p>` : ''}
+          ${l.for === 'students' ? `<span class="link-card-badge">class</span>` : ''}
+        </div>
       </div>
-      ${l.note ? `<div class="link-note">${esc(l.note)}</div>` : ''}
-    </div>
-  `).join('');
+    `).join('');
+  } else {
+    el.innerHTML = items.map(l => `
+      <div class="link-item">
+        <div class="link-row">
+          <a class="link-title" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.title)}</a>
+          ${l.url ? `<span class="link-domain">${esc(domain(l.url))}</span>` : ''}
+          ${l.for === 'students' ? `<span class="link-badge">class</span>` : ''}
+        </div>
+        ${l.note ? `<div class="link-note">${esc(l.note)}</div>` : ''}
+      </div>
+    `).join('');
+  }
 }
+
+// File toggle handler (expand/collapse extra files)
+document.addEventListener('click', e => {
+  if (!e.target.matches('.files-toggle')) return;
+  const overflow = e.target.previousElementSibling;
+  const isHidden = overflow.style.display === 'none' || overflow.style.display === '';
+  overflow.style.display = isHidden ? 'grid' : 'none';
+  const count = overflow.querySelectorAll('.cabinet-file').length;
+  e.target.textContent = isHidden ? 'Show less ↑' : `+${count} more`;
+});
 
 // Load & render content.json
 async function load() {
@@ -89,7 +115,7 @@ async function load() {
 
   // Class Resources + Reading Rabbit Hole
   renderLinks('resources-list', data.resources, 'Nothing posted yet.');
-  renderLinks('rabbit-list', data.rabbit, 'Nothing posted yet.');
+  renderLinks('rabbit-list', data.rabbit, 'Nothing posted yet.', 'plum');
 
   // Works library (reading.html)
   const worksEl = document.getElementById('works-grid');
@@ -98,13 +124,22 @@ async function load() {
       worksEl.innerHTML = '<div class="empty">No works yet.</div>';
     } else {
       worksEl.innerHTML = data.works.map(w => {
+        const PREVIEW = 2;
+        const renderFile = f => `
+          <a class="cabinet-file" href="${esc(f.url)}" target="_blank" rel="noopener">
+            <span class="cabinet-file-type">${esc(f.type || 'file')}</span>
+            <span class="cabinet-file-name">${esc(f.name)}</span>
+          </a>`;
         const filesHtml = (!w.files || w.files.length === 0)
           ? `<div class="cabinet-empty">No files yet.</div>`
-          : w.files.map(f => `
-              <a class="cabinet-file" href="${esc(f.url)}" target="_blank" rel="noopener">
-                <span class="cabinet-file-type">${esc(f.type || 'file')}</span>
-                <span class="cabinet-file-name">${esc(f.name)}</span>
-              </a>`).join('');
+          : (() => {
+              const visible = w.files.slice(0, PREVIEW).map(renderFile).join('');
+              const hidden  = w.files.slice(PREVIEW);
+              return visible
+                + (hidden.length ? `
+                  <div class="files-overflow" style="display:none">${hidden.map(renderFile).join('')}</div>
+                  <button class="files-toggle">+${hidden.length} more</button>` : '');
+            })();
         return `
           <div class="work-card">
             <div class="work-header${w.class === 'E10' ? ' e10' : ''}">
