@@ -235,7 +235,13 @@ body {
 .page-header {
   padding: 2rem 1.75rem 1.5rem;
   border-bottom: 1px solid var(--border);
+  border-top: 4px solid transparent;
 }
+
+/* Per-page accent strip — top of page header */
+body.page-reading   .page-header { border-top-color: #1E3A5F; }
+body.page-resources .page-header { border-top-color: #1E6080; }
+body.page-rabbit    .page-header { border-top-color: #3D1A60; }
 
 .page-back {
   font-family: var(--font-mono);
@@ -480,12 +486,12 @@ body {
 }
 
 .link-card-header {
-  background: #1A3A4A; /* teal — resources */
+  background: #1E6080; /* teal — resources */
   padding: 0.9rem 1.25rem;
 }
 
 .link-card-header.plum {
-  background: #2A1A4A; /* plum — rabbit hole */
+  background: #3D1A60; /* plum — rabbit hole */
 }
 
 .link-card-title {
