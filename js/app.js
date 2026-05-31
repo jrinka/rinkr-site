@@ -108,3 +108,5 @@ async function load() {
     }
   }
 }
+
+load();
