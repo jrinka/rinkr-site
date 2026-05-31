@@ -41,7 +41,7 @@ async function load() {
     readingEl.innerHTML = '<div class="empty">Nothing assigned yet.</div>';
   } else {
     readingEl.innerHTML = data.reading.map(b => `
-      <div class="reading-card">
+      <div class="reading-entry">
         <div class="reading-class">${esc(b.class)}</div>
         <div class="reading-title">${esc(b.title)}</div>
         <div class="reading-author">${esc(b.author)}</div>
