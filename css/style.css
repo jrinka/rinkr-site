@@ -98,11 +98,25 @@ body {
   border-radius: var(--radius);
   padding: 1.375rem;
   box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  border-top: 3px solid transparent;
 }
 
 [data-theme="light"] .section {
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
+
+/* Per-card accent colours matching detail pages */
+.section--reading   { border-top-color: #1E3A5F; }
+.section--resources { border-top-color: #1E6080; }
+.section--rabbit    { border-top-color: #3D1A60; }
+
+.section--reading   .section-title-link { color: #1E3A5F; }
+.section--resources .section-title-link { color: #1E6080; }
+.section--rabbit    .section-title-link { color: #3D1A60; }
+
+[data-theme="dark"] .section--reading   .section-title-link { color: #5a8abf; }
+[data-theme="dark"] .section--resources .section-title-link { color: #3a9abf; }
+[data-theme="dark"] .section--rabbit    .section-title-link { color: #9a5abf; }
 
 .section-title-link {
   display: flex;
