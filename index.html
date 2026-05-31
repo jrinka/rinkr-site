@@ -3,41 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>rinkr</title>
+  <title>Mr. Rinka's English Classes</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <header class="site-header">
-    <span class="site-title">rinkr</span>
+    <div class="site-name">Mr. Rinka's <span>English Classes</span></div>
     <button class="theme-toggle" id="theme-toggle" title="toggle theme">◐</button>
   </header>
 
   <main class="main">
 
     <section class="section">
-      <div class="section-header">
-        <span class="section-title">Currently Reading</span>
-      </div>
+      <a href="/reading" class="section-title-link">
+        Currently Reading
+        <span class="arrow">→</span>
+      </a>
       <div id="reading-list" class="reading-list">
         <div class="loading">loading…</div>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-header">
-        <span class="section-title">Fresh</span>
-      </div>
-      <div id="fresh-list" class="link-list">
+      <a href="/resources" class="section-title-link">
+        Class Resources
+        <span class="arrow">→</span>
+      </a>
+      <div id="resources-list" class="link-list">
         <div class="loading">loading…</div>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-header">
-        <span class="section-title">Deep Dive</span>
-      </div>
-      <div id="deep-list" class="link-list">
+      <a href="/rabbit-hole" class="section-title-link">
+        Reading Rabbit Hole
+        <span class="arrow">→</span>
+      </a>
+      <div id="rabbit-list" class="link-list">
         <div class="loading">loading…</div>
       </div>
     </section>

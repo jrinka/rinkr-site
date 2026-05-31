@@ -21,42 +21,9 @@ function domain(url) {
   try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; }
 }
 
-// Load & render content.json
-async function load() {
-  let data;
-  try {
-    const res = await fetch('/content.json');
-    if (!res.ok) throw new Error(res.status);
-    data = await res.json();
-  } catch {
-    ['reading-list', 'fresh-list', 'deep-list'].forEach(id => {
-      document.getElementById(id).innerHTML = '<div class="empty">Could not load.</div>';
-    });
-    return;
-  }
-
-  // Reading list
-  const readingEl = document.getElementById('reading-list');
-  if (!data.reading || data.reading.length === 0) {
-    readingEl.innerHTML = '<div class="empty">Nothing assigned yet.</div>';
-  } else {
-    readingEl.innerHTML = data.reading.map(b => `
-      <div class="reading-entry">
-        <div class="reading-class">${esc(b.class)}</div>
-        <div class="reading-title">${esc(b.title)}</div>
-        <div class="reading-author">${esc(b.author)}</div>
-        ${b.note ? `<div class="reading-note">${esc(b.note)}</div>` : ''}
-      </div>
-    `).join('');
-  }
-
-  // Fresh + Deep Dive (same link format, different sections)
-  renderLinks('fresh-list', data.fresh, 'Nothing posted yet.');
-  renderLinks('deep-list', data.deep, 'Nothing posted yet.');
-}
-
 function renderLinks(id, items, emptyMsg) {
   const el = document.getElementById(id);
+  if (!el) return;
   if (!items || items.length === 0) {
     el.innerHTML = `<div class="empty">${emptyMsg}</div>`;
     return;
@@ -71,6 +38,43 @@ function renderLinks(id, items, emptyMsg) {
       ${l.note ? `<div class="link-note">${esc(l.note)}</div>` : ''}
     </div>
   `).join('');
+}
+
+// Load & render content.json
+async function load() {
+  let data;
+  try {
+    const res = await fetch('/content.json');
+    if (!res.ok) throw new Error(res.status);
+    data = await res.json();
+  } catch {
+    ['reading-list', 'resources-list', 'rabbit-list'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<div class="empty">Could not load.</div>';
+    });
+    return;
+  }
+
+  // Currently Reading
+  const readingEl = document.getElementById('reading-list');
+  if (readingEl) {
+    if (!data.reading || data.reading.length === 0) {
+      readingEl.innerHTML = '<div class="empty">Nothing assigned yet.</div>';
+    } else {
+      readingEl.innerHTML = data.reading.map(b => `
+        <div class="reading-entry">
+          <div class="reading-class">${esc(b.class)}</div>
+          <div class="reading-title">${esc(b.title)}</div>
+          <div class="reading-author">${esc(b.author)}</div>
+          ${b.note ? `<div class="reading-note">${esc(b.note)}</div>` : ''}
+        </div>
+      `).join('');
+    }
+  }
+
+  // Class Resources + Reading Rabbit Hole
+  renderLinks('resources-list', data.resources, 'Nothing posted yet.');
+  renderLinks('rabbit-list', data.rabbit, 'Nothing posted yet.');
 }
 
 load();

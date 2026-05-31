@@ -13,21 +13,33 @@
       "note": ""
     }
   ],
-  "fresh": [
+  "resources": [
     {
-      "title": "The Danger of a Single Story",
-      "url": "https://www.ted.com/talks/chimamanda_ngozi_adichie_the_danger_of_a_single_story",
-      "note": "Good for discussions on perspective",
+      "title": "Purdue OWL — MLA Formatting",
+      "url": "https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_general_format.html",
+      "note": "The definitive MLA reference",
       "for": "students"
     },
     {
-      "title": "Poem of the Day — The Academy of American Poets",
-      "url": "https://poets.org/poem-a-day",
+      "title": "Annotating a Text",
+      "url": "https://owl.purdue.edu/owl/general_writing/the_writing_process/reading_to_write/annotating_a_text.html",
       "note": "",
+      "for": "students"
+    },
+    {
+      "title": "IB English — LitLearnAP (YouTube)",
+      "url": "https://www.youtube.com/@LitLearnAP",
+      "note": "Strong IB-specific breakdowns of texts and assessments",
       "for": "students"
     }
   ],
-  "deep": [
+  "rabbit": [
+    {
+      "title": "The Danger of a Single Story",
+      "url": "https://www.ted.com/talks/chimamanda_ngozi_adichie_the_danger_of_a_single_story",
+      "note": "Chimamanda Ngozi Adichie — required viewing for any English student",
+      "for": "students"
+    },
     {
       "title": "The Paris Review — Interviews",
       "url": "https://www.theparisreview.org/interviews",
