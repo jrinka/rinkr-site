@@ -137,6 +137,12 @@
   ],
   "resources": [
     {
+      "title": "Lit Passage Practice",
+      "url": "/practice/",
+      "note": "Interactive — analyze short extracts from classic texts and get instant feedback",
+      "for": "students"
+    },
+    {
       "title": "Purdue OWL — MLA Formatting",
       "url": "https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_general_format.html",
       "note": "The definitive MLA reference",
