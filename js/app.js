@@ -29,6 +29,42 @@ function domain(url) {
   try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; }
 }
 
+// ── Book covers (Open Library) ──────────────────────────────────────
+// Renders a uniform placeholder; loadCover() fills the real cover async.
+// Skips genre entries that have no single author (e.g. Poetry, Essays).
+function coverMarkup(title, author, type, size) {
+  if (!title) return '';
+  const cls = 'cover' + (size === 'feature' ? ' cover--feature' : '');
+  const label = type || author || '';
+  return `<div class="${cls}" data-cover-title="${esc(title)}" data-cover-author="${esc(author || '')}"><span class="cover-fallback">${esc(label)}</span></div>`;
+}
+
+async function loadCover(el) {
+  const title = el.getAttribute('data-cover-title');
+  const author = el.getAttribute('data-cover-author') || '';
+  if (!title || !author) return;   // genre entries keep the type label
+  const key = 'ol:' + title + '|' + author;
+  let url = localStorage.getItem(key);
+  if (url === null) {
+    try {
+      const params = new URLSearchParams({ title, limit: '1', fields: 'cover_i' });
+      if (author) params.set('author', author);
+      const res = await fetch('https://openlibrary.org/search.json?' + params.toString());
+      const data = await res.json();
+      const ci = data.docs && data.docs[0] && data.docs[0].cover_i;
+      url = ci ? 'https://covers.openlibrary.org/b/id/' + ci + '-M.jpg' : '';
+      localStorage.setItem(key, url);
+    } catch (e) { url = ''; }
+  }
+  if (url) {
+    const img = new Image();
+    img.className = 'cover-img';
+    img.alt = title + ' — cover';
+    img.onload = () => { el.classList.add('has-img'); el.innerHTML = ''; el.appendChild(img); };
+    img.src = url;
+  }
+}
+
 function renderLinks(id, items, emptyMsg, headerClass) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -78,7 +114,7 @@ document.addEventListener('click', e => {
 async function load() {
   let data;
   try {
-    const res = await fetch('/content.json');
+    const res = await fetch('content.json');
     if (!res.ok) throw new Error(res.status);
     data = await res.json();
   } catch {
@@ -109,13 +145,16 @@ async function load() {
         </div>
       `).join('');
     } else {
-      // Simple entries on homepage
+      // Simple entries on homepage — small cover thumbnail beside the text
       readingEl.innerHTML = data.reading.map(b => `
         <div class="reading-entry">
-          <div class="reading-class">${esc(b.class)}</div>
-          <div class="reading-title">${esc(b.title)}</div>
-          <div class="reading-author">${esc(b.author)}</div>
-          ${b.note ? `<div class="reading-note">${esc(b.note)}</div>` : ''}
+          ${coverMarkup(b.title, b.author, b.type)}
+          <div class="reading-entry-text">
+            <div class="reading-class">${esc(b.class)}</div>
+            <div class="reading-title">${esc(b.title)}</div>
+            <div class="reading-author">${esc(b.author)}</div>
+            ${b.note ? `<div class="reading-note">${esc(b.note)}</div>` : ''}
+          </div>
         </div>
       `).join('');
     }
@@ -135,28 +174,26 @@ async function load() {
 
   const headerCls = c => c === 'E10' ? ' e10' : c === 'IB LANG & LIT' ? ' lang-lit' : '';
 
-  const renderWorkCard = w => {
-    const filesHtml = (!w.files || w.files.length === 0)
-      ? `<div class="cabinet-empty">No files yet.</div>`
-      : (() => {
-          const visible = w.files.slice(0, PREVIEW).map(renderFile).join('');
-          const hidden  = w.files.slice(PREVIEW);
-          return visible + (hidden.length ? `
-            <div class="files-overflow" style="display:none">${hidden.map(renderFile).join('')}</div>
-            <button class="files-toggle">+${hidden.length} more</button>` : '');
-        })();
+  const renderWorkRow = w => {
+    const hasFiles = w.files && w.files.length > 0;
+    let filesHtml = '';
+    if (hasFiles) {
+      const visible = w.files.slice(0, PREVIEW).map(renderFile).join('');
+      const hidden  = w.files.slice(PREVIEW);
+      filesHtml = `<div class="work-files">${visible}${hidden.length ? `
+        <div class="files-overflow" style="display:none">${hidden.map(renderFile).join('')}</div>
+        <button class="files-toggle">+${hidden.length} more</button>` : ''}</div>`;
+    }
     return `
-      <div class="work-card">
-        <div class="work-header${headerCls(w.class)}">
-          <div class="work-header-text">
-            <div class="work-title">${esc(w.title)}</div>
-            ${w.author ? `<div class="work-author">${esc(w.author)}</div>` : ''}
+      <div class="work-row${hasFiles ? ' has-files' : ''}">
+        <div class="work-row-head">
+          ${hasFiles ? coverMarkup(w.title, w.author, w.type) : ''}
+          <div class="work-row-text">
+            <div class="work-row-title">${esc(w.title)}</div>
+            ${w.author ? `<div class="work-row-author">${esc(w.author)}</div>` : ''}
           </div>
         </div>
-        <div class="work-cabinet">
-          <div class="cabinet-drawer-label">Files &amp; Resources</div>
-          ${filesHtml}
-        </div>
+        ${filesHtml}
       </div>`;
   };
 
@@ -168,14 +205,13 @@ async function load() {
       rEl.innerHTML = items.length === 0
         ? '<div class="empty">Nothing assigned yet.</div>'
         : items.map(b => `
-          <div class="work-card">
-            <div class="work-header${headerCls(cls)}">
-              <div class="work-header-text">
-                <div class="work-title">${esc(b.title)}</div>
-                ${b.author ? `<div class="work-author">${esc(b.author)}</div>` : ''}
-              </div>
+          <div class="active-feature">
+            ${coverMarkup(b.title, b.author, b.type, 'feature')}
+            <div class="active-feature-text">
+              <div class="work-title">${esc(b.title)}</div>
+              ${b.author ? `<div class="work-author">${esc(b.author)}</div>` : ''}
+              ${b.note ? `<div class="reading-note">${esc(b.note)}</div>` : ''}
             </div>
-            ${b.note ? `<div class="active-card-note">${esc(b.note)}</div>` : ''}
           </div>`).join('');
     }
 
@@ -185,9 +221,29 @@ async function load() {
       const items = (data.works || []).filter(w => w.class === cls && !activeTitle.has(w.title));
       wEl.innerHTML = items.length === 0
         ? '<div class="empty">No works yet.</div>'
-        : items.map(renderWorkCard).join('');
+        : items.map(renderWorkRow).join('');
     }
   });
+
+  // Book covers (Open Library) + masthead term line
+  document.querySelectorAll('.cover[data-cover-title]').forEach(loadCover);
+  const termEl = document.getElementById('masthead-term');
+  if (termEl && data.reading && data.reading.length) {
+    termEl.innerHTML = 'This term — ' + data.reading
+      .map(b => `<span class="term-title">${esc(b.title)}</span>`)
+      .join('<span class="term-sep"> · </span>');
+  }
+
+  // Marginalia folio count (detail pages)
+  const folio = document.getElementById('folio-count');
+  if (folio) {
+    const b = document.body.classList;
+    const n = b.contains('page-reading')   ? (data.works || []).length
+            : b.contains('page-resources') ? (data.resources || []).length
+            : b.contains('page-rabbit')    ? (data.rabbit || []).length
+            : 0;
+    folio.textContent = n;
+  }
 }
 
 load();

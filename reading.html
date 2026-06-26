@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Course Texts — Mr. Rinka's English Classes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="page-reading">
@@ -13,47 +16,63 @@
     <button class="theme-toggle" id="theme-toggle" title="toggle theme">◐</button>
   </header>
 
-  <div class="page-header">
-    <a href="/" class="page-back">← Home</a>
-    <h1 class="page-title">Course Texts</h1>
-    <p class="page-desc">Organized by class — active texts for Fall 2026 and the full works library with resources for each text.</p>
-  </div>
+  <div class="sheet">
+    <aside class="sheet-margin">
+      <a href="/" class="page-back">← Index</a>
+      <hr class="sheet-rule">
+      <div class="sheet-note">Fall 2026</div>
+      <div class="sheet-folio"><span class="folio-num" id="folio-count">—</span> works in the library</div>
+    </aside>
 
-  <div class="page-content-wide">
-    <div class="class-columns">
-
-      <!-- IB Lit -->
-      <div class="class-col class-col--iblit">
-        <div class="class-col-header">IB Lit</div>
-        <div class="cabinet-section-label">Fall 2026</div>
-        <div id="reading-iblit" class="active-reading-col"><div class="loading">loading…</div></div>
-        <hr class="library-divider">
-        <div class="cabinet-section-label">Works Library</div>
-        <div id="works-iblit" class="works-col"><div class="loading">loading…</div></div>
+    <div class="sheet-body">
+      <div class="page-header">
+        <h1 class="page-title">Course Texts</h1>
+        <p class="page-desc">Organized by class — active texts for Fall 2026 and the full works library with resources for each text.</p>
       </div>
 
-      <!-- IB Lang & Lit -->
-      <div class="class-col class-col--iblanglit">
-        <div class="class-col-header">IB Lang &amp; Lit</div>
-        <div class="cabinet-section-label">Fall 2026</div>
-        <div id="reading-iblanglit" class="active-reading-col"><div class="loading">loading…</div></div>
-        <hr class="library-divider">
-        <div class="cabinet-section-label">Works Library</div>
-        <div id="works-iblanglit" class="works-col"><div class="loading">loading…</div></div>
-      </div>
+      <div class="page-content-wide">
+        <div class="class-columns">
 
-      <!-- English 10 -->
-      <div class="class-col class-col--e10">
-        <div class="class-col-header">English 10</div>
-        <div class="cabinet-section-label">Fall 2026</div>
-        <div id="reading-e10" class="active-reading-col"><div class="loading">loading…</div></div>
-        <hr class="library-divider">
-        <div class="cabinet-section-label">Works Library</div>
-        <div id="works-e10" class="works-col"><div class="loading">loading…</div></div>
-      </div>
+          <!-- IB Lit -->
+          <div class="class-col class-col--iblit">
+            <div class="class-col-header">IB Lit</div>
+            <div class="cabinet-section-label">Fall 2026</div>
+            <div id="reading-iblit" class="active-reading-col"><div class="loading">loading…</div></div>
+            <hr class="library-divider">
+            <div class="cabinet-section-label">Works Library</div>
+            <div id="works-iblit" class="works-col"><div class="loading">loading…</div></div>
+          </div>
 
+          <!-- IB Lang & Lit -->
+          <div class="class-col class-col--iblanglit">
+            <div class="class-col-header">IB Lang &amp; Lit</div>
+            <div class="cabinet-section-label">Fall 2026</div>
+            <div id="reading-iblanglit" class="active-reading-col"><div class="loading">loading…</div></div>
+            <hr class="library-divider">
+            <div class="cabinet-section-label">Works Library</div>
+            <div id="works-iblanglit" class="works-col"><div class="loading">loading…</div></div>
+          </div>
+
+          <!-- English 10 -->
+          <div class="class-col class-col--e10">
+            <div class="class-col-header">English 10</div>
+            <div class="cabinet-section-label">Fall 2026</div>
+            <div id="reading-e10" class="active-reading-col"><div class="loading">loading…</div></div>
+            <hr class="library-divider">
+            <div class="cabinet-section-label">Works Library</div>
+            <div id="works-e10" class="works-col"><div class="loading">loading…</div></div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
+
+  <footer class="colophon">
+    <span><em>Mr. Rinka's English Classes</em></span>
+    <span>Set in Newsreader &amp; IBM Plex Mono</span>
+    <span><a href="/">rinkr.net</a></span>
+  </footer>
 
   <script src="js/app.js"></script>
 </body>

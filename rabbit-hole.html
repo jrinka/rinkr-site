@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reading Rabbit Hole — Mr. Rinka's English Classes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="page-rabbit">
@@ -13,17 +16,32 @@
     <button class="theme-toggle" id="theme-toggle" title="toggle theme">◐</button>
   </header>
 
-  <div class="page-header">
-    <a href="/" class="page-back">← Home</a>
-    <h1 class="page-title">Reading Rabbit Hole</h1>
-    <p class="page-desc">Quirky articles, strange stories, and things that don't fit anywhere else but are worth your time.</p>
-  </div>
+  <div class="sheet">
+    <aside class="sheet-margin">
+      <a href="/" class="page-back">← Index</a>
+      <hr class="sheet-rule">
+      <div class="sheet-folio"><span class="folio-num" id="folio-count">—</span> stray finds</div>
+    </aside>
 
-  <div class="page-content-wide">
-    <div id="rabbit-list" class="link-cards-grid">
-      <div class="loading">loading…</div>
+    <div class="sheet-body">
+      <div class="page-header">
+        <h1 class="page-title">Reading Rabbit Hole</h1>
+        <p class="page-desc">Quirky articles, strange stories, and things that don't fit anywhere else but are worth your time.</p>
+      </div>
+
+      <div class="page-content-wide">
+        <div id="rabbit-list" class="link-cards-grid">
+          <div class="loading">loading…</div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <footer class="colophon">
+    <span><em>Mr. Rinka's English Classes</em></span>
+    <span>Set in Newsreader &amp; IBM Plex Mono</span>
+    <span><a href="/">rinkr.net</a></span>
+  </footer>
 
   <script src="js/app.js"></script>
 </body>

@@ -4,19 +4,22 @@
       "class": "IB LIT",
       "title": "Interior Chinatown",
       "author": "Charles Yu",
-      "note": ""
+      "note": "",
+      "type": "Novel"
     },
     {
       "class": "IB LANG & LIT",
       "title": "An Enemy of the People",
       "author": "Henrik Ibsen",
-      "note": ""
+      "note": "",
+      "type": "Drama"
     },
     {
       "class": "E10",
       "title": "Lord of the Flies",
       "author": "William Golding",
-      "note": ""
+      "note": "",
+      "type": "Novel"
     }
   ],
   "works": [
@@ -24,25 +27,29 @@
       "title": "An Enemy of the People",
       "author": "Henrik Ibsen",
       "class": "IB LANG & LIT",
-      "files": []
+      "files": [],
+      "type": "Drama"
     },
     {
       "title": "Parasite",
       "author": "Bong Joon-ho",
       "class": "IB LANG & LIT",
-      "files": []
+      "files": [],
+      "type": "Film"
     },
     {
       "title": "Maus",
       "author": "Art Spiegelman",
       "class": "IB LANG & LIT",
-      "files": []
+      "files": [],
+      "type": "Graphic Novel"
     },
     {
       "title": "The Great Gatsby",
       "author": "F. Scott Fitzgerald",
       "class": "IB LANG & LIT",
-      "files": []
+      "files": [],
+      "type": "Novel"
     },
     {
       "title": "Kitchen",
@@ -54,85 +61,99 @@
           "url": "https://isbdragons-my.sharepoint.com/:u:/g/personal/jrinka_isb_cn/IQCOijrwCRRYSpa6J9C44M01AcbmfeSXf0cPhb5mepG-Fyo?e=6Rhche",
           "type": "epub"
         }
-      ]
+      ],
+      "type": "Novel"
     },
     {
       "title": "Interior Chinatown",
       "author": "Charles Yu",
       "class": "IB LIT",
-      "files": []
+      "files": [],
+      "type": "Novel"
     },
     {
       "title": "In the Time of the Butterflies",
       "author": "Julia Alvarez",
       "class": "IB LIT",
-      "files": []
+      "files": [],
+      "type": "Novel"
     },
     {
       "title": "No Exit",
       "author": "Jean-Paul Sartre",
       "class": "IB LIT",
-      "files": []
+      "files": [],
+      "type": "Drama"
     },
     {
       "title": "A Doll's House",
       "author": "Henrik Ibsen",
       "class": "IB LIT",
-      "files": []
+      "files": [],
+      "type": "Drama"
     },
     {
       "title": "The World's Wife",
       "author": "Carol Ann Duffy",
       "class": "IB LIT",
-      "files": []
+      "files": [],
+      "type": "Poetry"
     },
     {
       "title": "Interpreter of Maladies",
       "author": "Jhumpa Lahiri",
       "class": "IB LIT",
-      "files": []
+      "files": [],
+      "type": "Short Stories"
     },
     {
       "title": "Minor Feelings",
       "author": "Cathy Park Hong",
       "class": "IB LIT",
-      "files": []
+      "files": [],
+      "type": "Essays"
     },
     {
       "title": "Metamorphosis",
       "author": "Franz Kafka",
       "class": "IB LIT",
-      "files": []
+      "files": [],
+      "type": "Novella"
     },
     {
       "title": "Death of a Salesman",
       "author": "Arthur Miller",
       "class": "IB LIT",
-      "files": []
+      "files": [],
+      "type": "Drama"
     },
     {
       "title": "Lord of the Flies",
       "author": "William Golding",
       "class": "E10",
-      "files": []
+      "files": [],
+      "type": "Novel"
     },
     {
       "title": "Romeo and Juliet",
       "author": "William Shakespeare",
       "class": "E10",
-      "files": []
+      "files": [],
+      "type": "Drama"
     },
     {
       "title": "Personal Essays",
       "author": "",
       "class": "E10",
-      "files": []
+      "files": [],
+      "type": "Essays"
     },
     {
       "title": "Poetry",
       "author": "",
       "class": "E10",
-      "files": []
+      "files": [],
+      "type": "Poetry"
     }
   ],
   "resources": [
