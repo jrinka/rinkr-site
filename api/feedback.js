@@ -8,15 +8,20 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing passage or response' });
   }
 
-  const prompt = `You are an IB English teacher giving brief feedback on a student's literary analysis. The student analysed a short passage.
+  const prompt = `You are an IB English teacher giving brief feedback on a student's literary analysis. The student was shown a short passage and asked to analyse it.
 
 Passage:
 ${passage}
 
-Student's analysis:
+Student's response:
 ${response}
 
-Write 2–3 sentences of specific, constructive feedback. Acknowledge what works, then give one concrete suggestion for improvement. Be direct and encouraging. Plain paragraph only — no bullet points, no headers.`;
+Before giving feedback, check for these cases and respond accordingly if any apply:
+- If the response is copied or nearly identical to the passage itself, start with: "This appears to be the passage copied verbatim, not an analysis."
+- If the response has nothing to do with the passage or literary analysis (e.g. off-topic questions, nonsense, inappropriate content), start with: "This doesn't appear to be a literary analysis of the passage." Then stop — do not give literary feedback.
+- If the response is appropriate, write 2–3 sentences of specific, constructive feedback. Acknowledge what works, then give one concrete suggestion for improvement.
+
+Be direct. Plain paragraph only — no bullet points, no headers.`;
 
   let apiRes;
   try {
