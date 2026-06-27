@@ -371,8 +371,11 @@ async function fetchAIFeedback(passage, response) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ passage, response }),
   });
-  if (!res.ok) throw new Error('Feedback request failed');
   const data = await res.json();
+  if (!res.ok) {
+    console.error('Feedback error:', data);
+    throw new Error(data.error || 'Feedback request failed');
+  }
   return data.feedback;
 }
 

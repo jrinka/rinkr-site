@@ -40,7 +40,7 @@ Write 2–3 sentences of specific, constructive feedback. Acknowledge what works
   if (!apiRes.ok) {
     const body = await apiRes.text();
     console.error('MiniMax error response:', apiRes.status, body);
-    return res.status(502).json({ error: 'AI service returned an error' });
+    return res.status(502).json({ error: 'AI service returned an error', detail: body });
   }
 
   const data = await apiRes.json();
