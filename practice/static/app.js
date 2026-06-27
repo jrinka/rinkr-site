@@ -217,8 +217,7 @@ async function fetchBookText(bookId, signal) {
   }
 
   const urls = [
-    `https://www.gutenberg.org/ebooks/${bookId}.txt.utf-8`,
-    `https://www.gutenberg.org/files/${bookId}/${bookId}-0.txt`,
+    `/api/gutenberg?id=${bookId}`,
   ];
 
   for (const url of urls) {
