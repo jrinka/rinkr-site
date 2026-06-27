@@ -44,9 +44,10 @@ Write 2–3 sentences of specific, constructive feedback. Acknowledge what works
   }
 
   const data = await apiRes.json();
+  console.log('MiniMax response:', JSON.stringify(data));
   const feedback = data.choices?.[0]?.message?.content?.trim();
   if (!feedback) {
-    return res.status(502).json({ error: 'Empty response from AI' });
+    return res.status(502).json({ error: 'Empty response from AI', raw: data });
   }
 
   return res.status(200).json({ feedback });

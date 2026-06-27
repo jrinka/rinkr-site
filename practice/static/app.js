@@ -376,6 +376,7 @@ async function fetchAIFeedback(passage, response) {
     console.error('Feedback error:', data);
     throw new Error(data.error || 'Feedback request failed');
   }
+  if (!data.feedback) console.error('Unexpected response shape:', data);
   return data.feedback;
 }
 
