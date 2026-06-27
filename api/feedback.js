@@ -20,10 +20,11 @@ Write 2–3 sentences of specific, constructive feedback. Acknowledge what works
 
   let apiRes;
   try {
-    apiRes = await fetch(`https://api.minimax.io/v1/text/chatcompletion_v2?token=${process.env.MINIMAX_APIKEY}`, {
+    apiRes = await fetch('https://api.minimax.io/v1/text/chatcompletion_v2', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.MINIMAX_APIKEY}`,
       },
       body: JSON.stringify({
         model: 'MiniMax-M2.5',
