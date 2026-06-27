@@ -34,7 +34,7 @@ Be direct. Plain paragraph only — no bullet points, no headers.`;
       body: JSON.stringify({
         model: 'MiniMax-M2.5',
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 400,
+        max_tokens: 2000,
       }),
     });
   } catch (err) {
