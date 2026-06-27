@@ -365,68 +365,15 @@ async function getRandomPassage(signal) {
 // Feedback
 // ---------------------------------------------------------------------------
 
-function evaluateFeedback(passage, response) {
-  const responseLower = response.toLowerCase();
-  const wc = countWords(response);
-
-  const checks = {
-    length: {
-      label: "Response is at least 50 words",
-      passed: wc >= 50,
-    },
-    text_reference: {
-      label: "Refers to specific evidence from the passage",
-      passed: /["']|\b(?:line|passage|text|says|describes|shows|suggests|quotes|writes|states)\b/.test(responseLower),
-    },
-    device_or_theme: {
-      label: "Mentions a literary device, tone, or theme",
-      passed: /\b(?:metaphor|simile|imagery|symbol|theme|tone|irony|personification|foreshadowing|conflict|mood|diction|syntax|character|setting|narrator|perspective|point of view|alliteration)\b/.test(responseLower),
-    },
-    explanation: {
-      label: "Explains how the evidence supports an interpretation",
-      passed: /\b(?:because|shows|suggests|indicates|demonstrates|reveals|implies|creates|emphasizes|highlights|conveys|illustrates|represents|reflects|therefore|thus)\b/.test(responseLower),
-    },
-  };
-
-  const passed = Object.values(checks).filter((c) => c.passed).length;
-  const total = Object.keys(checks).length;
-
-  let rating;
-  if (passed === total) rating = "Strong";
-  else if (passed >= total / 2) rating = "Good";
-  else rating = "Developing";
-
-  const missing = Object.values(checks)
-    .filter((c) => !c.passed)
-    .map((c) => c.label);
-
-  const suggestions = [];
-  if (!checks.length.passed) {
-    suggestions.push("Try writing a bit more—aim for at least 50 words so you can develop your ideas.");
-  }
-  if (!checks.text_reference.passed) {
-    suggestions.push("Quote or paraphrase a specific line from the passage to ground your analysis.");
-  }
-  if (!checks.device_or_theme.passed) {
-    suggestions.push("Identify a literary device, tone, or theme the author is using.");
-  }
-  if (!checks.explanation.passed) {
-    suggestions.push("Explain why the evidence matters—what does it show about meaning or effect?");
-  }
-  if (suggestions.length === 0) {
-    suggestions.push("Great job! Your analysis covers the key elements of a strong response.");
-  }
-
-  return {
-    response_word_count: wc,
-    checks,
-    passed,
-    total,
-    rating,
-    missing,
-    suggestions,
-    generated_at: new Date().toISOString(),
-  };
+async function fetchAIFeedback(passage, response) {
+  const res = await fetch('/api/feedback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ passage, response }),
+  });
+  if (!res.ok) throw new Error('Feedback request failed');
+  const data = await res.json();
+  return data.feedback;
 }
 
 // ---------------------------------------------------------------------------
@@ -447,11 +394,7 @@ const els = {
   exportBtn: document.getElementById("export-btn"),
   exportFormat: document.getElementById("export-format"),
   feedbackCard: document.getElementById("feedback-card"),
-  scoreRing: document.getElementById("score-ring"),
-  scoreValue: document.getElementById("score-value"),
-  rating: document.getElementById("rating"),
-  checklist: document.getElementById("checklist"),
-  suggestions: document.getElementById("suggestions"),
+  aiFeedbackText: document.getElementById("ai-feedback-text"),
 };
 
 let currentPassage = null;
@@ -505,51 +448,10 @@ function renderPassage(data) {
   }, 150);
 }
 
-function renderFeedback(result) {
-  currentFeedback = result;
+function renderFeedback(feedbackText) {
+  currentFeedback = feedbackText;
+  els.aiFeedbackText.textContent = feedbackText;
   els.feedbackCard.classList.remove("hidden");
-  els.scoreValue.textContent = `${result.passed}/${result.total}`;
-  els.rating.textContent = result.rating;
-
-  const angle = (result.passed / result.total) * 360;
-  els.scoreRing.style.setProperty("--score-angle", `${angle}deg`);
-
-  els.feedbackCard.style.borderTopColor = result.rating === "Strong"
-    ? "var(--success)"
-    : result.rating === "Good"
-      ? "var(--warning)"
-      : "var(--danger)";
-
-  els.checklist.innerHTML = "";
-  let delay = 0;
-  for (const check of Object.values(result.checks)) {
-    const li = document.createElement("li");
-    li.className = check.passed ? "pass" : "fail";
-    li.style.animationDelay = `${delay}ms`;
-
-    const iconSpan = document.createElement("span");
-    iconSpan.className = "check-icon";
-    iconSpan.setAttribute("aria-hidden", "true");
-    iconSpan.textContent = check.passed ? "✓" : "!";
-
-    const labelSpan = document.createElement("span");
-    labelSpan.className = "check-label";
-    labelSpan.textContent = check.label;
-
-    li.appendChild(iconSpan);
-    li.appendChild(labelSpan);
-    els.checklist.appendChild(li);
-    delay += 80;
-  }
-
-  const ul = els.suggestions.querySelector("ul");
-  ul.innerHTML = "";
-  for (const suggestion of result.suggestions) {
-    const li = document.createElement("li");
-    li.textContent = suggestion;
-    ul.appendChild(li);
-  }
-
   els.feedbackCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
@@ -590,17 +492,7 @@ function exportMarkdown() {
       "",
       "## Feedback",
       "",
-      `**Rating:** ${currentFeedback.rating} (${currentFeedback.passed}/${currentFeedback.total})`,
-      "",
-      "### Checks",
-      "",
-      ...Object.values(currentFeedback.checks).map((c) => `- [${c.passed ? "x" : " "}] ${c.label}`),
-      "",
-      "### Suggestions",
-      "",
-      ...currentFeedback.suggestions.map((s) => `- ${s}`),
-      "",
-      `_Exported at ${currentFeedback.generated_at}_`
+      currentFeedback,
     );
   } else {
     lines.push("", "_No feedback submitted yet._");
@@ -660,7 +552,7 @@ async function loadNewPassage() {
   }
 }
 
-function handleSubmit() {
+async function handleSubmit() {
   if (!currentPassage) {
     alert("Please load a passage first.");
     return;
@@ -678,9 +570,12 @@ function handleSubmit() {
   els.submitBtn.innerHTML = '<span class="btn-icon" aria-hidden="true">⟳</span> Analyzing…';
 
   try {
-    const result = evaluateFeedback(currentPassage.passage, response);
+    const feedbackText = await fetchAIFeedback(currentPassage.passage, response);
     currentResponse = response;
-    renderFeedback(result);
+    renderFeedback(feedbackText);
+  } catch (err) {
+    console.error('Feedback error:', err);
+    alert('Could not get feedback right now. Please try again.');
   } finally {
     els.submitBtn.disabled = false;
     els.submitBtn.innerHTML = originalText;

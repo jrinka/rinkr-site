@@ -353,6 +353,20 @@ body {
     border-top: 6px solid var(--primary);
 }
 
+.ai-feedback {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0.5rem 0 0;
+}
+
+.ai-disclaimer {
+    font-size: 0.8rem;
+    color: var(--text-muted, #888);
+    margin: 1rem 0 0;
+    font-style: italic;
+}
+
 .feedback-panel.hidden {
     display: none;
 }
