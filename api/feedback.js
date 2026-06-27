@@ -27,7 +27,7 @@ Write 2–3 sentences of specific, constructive feedback. Acknowledge what works
         'Authorization': `Bearer ${process.env.MINIMAX_APIKEY}`,
       },
       body: JSON.stringify({
-        model: 'MiniMax-M2.5-highspeed',
+        model: 'MiniMax-M2.5',
         messages: [{ role: 'user', content: prompt }],
         max_tokens: 200,
       }),
@@ -45,7 +45,11 @@ Write 2–3 sentences of specific, constructive feedback. Acknowledge what works
 
   const data = await apiRes.json();
   console.log('MiniMax response:', JSON.stringify(data));
-  const feedback = data.choices?.[0]?.message?.content?.trim();
+  // Native MiniMax format uses choices[0].messages[0].content (plural)
+  const feedback = (
+    data.choices?.[0]?.messages?.[0]?.content ??
+    data.choices?.[0]?.message?.content
+  )?.trim();
   if (!feedback) {
     return res.status(502).json({ error: 'Empty response from AI', raw: data });
   }
