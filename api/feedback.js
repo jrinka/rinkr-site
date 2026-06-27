@@ -24,7 +24,7 @@ Write 2–3 sentences of specific, constructive feedback. Acknowledge what works
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.MINIMAX_API_KEY}`,
+        'Authorization': `Bearer ${process.env.MINIMAX_APIKEY}`,
       },
       body: JSON.stringify({
         model: 'MiniMax-M2.5-highspeed',
