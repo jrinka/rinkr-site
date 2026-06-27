@@ -20,7 +20,7 @@ Write 2–3 sentences of specific, constructive feedback. Acknowledge what works
 
   let apiRes;
   try {
-    apiRes = await fetch('https://api.minimax.io/v1/text/chatcompletion_v2', {
+    apiRes = await fetch('https://api.minimax.chat/v1/text/chatcompletion_v2', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
