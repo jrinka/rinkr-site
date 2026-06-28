@@ -82,7 +82,10 @@ function renderLinks(id, items, emptyMsg, headerClass) {
         </div>
         <div class="link-card-body">
           ${l.note ? `<p class="link-card-note">${esc(l.note)}</p>` : ''}
-          ${l.for === 'students' ? `<span class="link-card-badge">class</span>` : ''}
+          <div class="link-card-badges">
+            ${l.type ? `<span class="link-card-badge">${esc(l.type)}</span>` : ''}
+            ${l.for === 'students' ? `<span class="link-card-badge">class</span>` : ''}
+          </div>
         </div>
       </div>
     `).join('');
@@ -92,6 +95,7 @@ function renderLinks(id, items, emptyMsg, headerClass) {
         <div class="link-row">
           <a class="link-title" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.title)}</a>
           ${l.url ? `<span class="link-domain">${esc(domain(l.url))}</span>` : ''}
+          ${l.type ? `<span class="link-badge">${esc(l.type)}</span>` : ''}
           ${l.for === 'students' ? `<span class="link-badge">class</span>` : ''}
         </div>
         ${l.note ? `<div class="link-note">${esc(l.note)}</div>` : ''}

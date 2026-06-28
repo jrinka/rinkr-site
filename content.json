@@ -161,25 +161,29 @@
       "title": "Lit Passage Practice",
       "url": "/practice/",
       "note": "Interactive — analyze short extracts from classic texts and get instant feedback",
-      "for": "students"
+      "for": "students",
+      "type": "tool"
     },
     {
       "title": "Purdue OWL — MLA Formatting",
       "url": "https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_general_format.html",
       "note": "The definitive MLA reference",
-      "for": "students"
+      "for": "students",
+      "type": "text"
     },
     {
       "title": "Annotating a Text",
       "url": "https://owl.purdue.edu/owl/general_writing/the_writing_process/reading_to_write/annotating_a_text.html",
       "note": "",
-      "for": "students"
+      "for": "students",
+      "type": "text"
     },
     {
       "title": "IB English — LitLearnAP (YouTube)",
       "url": "https://www.youtube.com/@LitLearnAP",
       "note": "Strong IB-specific breakdowns of texts and assessments",
-      "for": "students"
+      "for": "students",
+      "type": "video"
     }
   ],
   "rabbit": [
@@ -187,13 +191,15 @@
       "title": "The Danger of a Single Story",
       "url": "https://www.ted.com/talks/chimamanda_ngozi_adichie_the_danger_of_a_single_story",
       "note": "Chimamanda Ngozi Adichie — required viewing for any English student",
-      "for": "students"
+      "for": "students",
+      "type": "video"
     },
     {
       "title": "The Paris Review — Interviews",
       "url": "https://www.theparisreview.org/interviews",
       "note": "Writers talking about craft",
-      "for": "me"
+      "for": "me",
+      "type": "text"
     }
   ]
 }

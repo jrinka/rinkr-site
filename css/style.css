@@ -592,6 +592,13 @@ body.page-rabbit    .page-header::after { background: var(--c-rabbit); }
   line-height: 1.5;
 }
 
+.link-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
 .link-card-badge {
   font-family: var(--font-mono);
   font-size: 0.58rem;
